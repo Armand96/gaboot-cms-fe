@@ -1,0 +1,88 @@
+<div>
+  <div class="flex">
+    <h3 class="text-2xl mb-2">Daftar Users</h3>
+    <button class="btn btn-primary ml-auto mb-2" (click)="create()">Buat</button>
+  </div>
+
+  <div class="collapse bg-base-200">
+    <input type="checkbox">
+    <div class="collapse-title text-xl font-medium">
+      Pencarian
+    </div>
+    <div class="collapse-content flex mb-5">
+      <div class="form-control px-2">
+        <label class="label">
+          <span class="label-text">User Name</span>
+        </label>
+        <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.userName" />
+      </div>
+
+      <!-- <div class="w-full"></div> -->
+
+      <div class="form-control px-2">
+        <label class="label">
+          <span class="label-text">Full Name</span>
+        </label>
+        <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.fullName" />
+      </div>
+
+      <button class="btn btn-primary mt-9" (click)="search()">Cari</button>
+    </div>
+
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="table border w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>User Name</th>
+          <th>email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Role</th>
+          <th class="text-center">Active</th>
+          <th class="text-center">Image</th>
+          <th class="text-center">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="hover"
+          *ngFor="let usr of users | paginate: { id:'userPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
+          <th>{{ usr.id }}</th>
+          <td>{{ usr.userName }}</td>
+          <td>{{ usr.email }}</td>
+          <td>{{ usr.firstName }}</td>
+          <td>{{ usr.lastName }}</td>
+          <td>{{ usr.role.roleName }}</td>
+          <td class="text-center">
+            <i class="fa-solid fa-check text-xl text-accent" *ngIf="usr.isActive"></i>
+            <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!usr.isActive"></i>
+          </td>
+          <td class="avatar flex justify-center items-center">
+            <div class="w-20 rounded"><img src="{{ api.baseUrl }}user/image/thumb/{{ usr.id }}" loading="lazy" /></div>
+          </td>
+          <td>
+            <div class="flex justify-center items-center">
+              <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
+              <button class="btn btn-primary mx-1" (click)="edit(usr.id)">Ubah</button>
+              <button class="btn btn-warning mx-1" (click)="delete(usr)">Hapus</button>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center mt-5">
+    <pagination-controls (pageChange)="onPageChange($event)" id="userPage"></pagination-controls>
+  </div>
+</div>
+
+<app-user-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
+  [textCreateUpdate]="operationMode" [selectedUser]="selectedUser"></app-user-modal-create-update>
+<app-user-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
+  [User]="selectedUser"></app-user-modal-delete>

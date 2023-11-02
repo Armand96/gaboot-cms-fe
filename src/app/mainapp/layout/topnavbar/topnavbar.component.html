@@ -1,0 +1,126 @@
+<div class="drawer">
+  <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col">
+    <!-- Navbar -->
+    <div class="w-full navbar bg-base-300">
+      <div class="flex-1 px-2 mx-2">
+        <label class="btn btn-ghost" for="my-drawer"><i class="fas fa-bars"></i></label>
+      </div>
+
+      <div class="flex-none hidden lg:block">
+        <ul class="menu menu-horizontal">
+          <!-- Navbar menu content here -->
+          <li>
+            <p>{{ user.userName }}</p>
+          </li>
+
+          <div class="dropdown dropdown-bottom dropdown-end">
+            <label tabindex="0" class="">
+              <div class="avatar px-1">
+                <div class="w-12 rounded-full">
+                  <img class="btn btn-circle" *ngIf="user.id != 0" src="{{ api.baseUrl }}user/image/{{ user.id }}" />
+                </div>
+              </div>
+            </label>
+            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+              <li><a class="w-full" (click)="openModal()">Ubah Profile</a></li>
+              <li><a class="w-full" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
+
+        </ul>
+      </div>
+
+      <div class="flex-none lg:hidden ml-auto dropdown dropdown-bottom dropdown-end">
+        <label tabindex="0" class="">
+          <div class="avatar pr-1">
+            <div class="w-12 rounded-full">
+              <img *ngIf="user.id != 0" src="{{ api.baseUrl }}user/image/{{ user.id }}" />
+            </div>
+          </div>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40">
+          <li><a class="w-full" (click)="openModal()">Ubah Profile</a></li>
+          <li><a class="w-full" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Page content here -->
+    <div class="ml-3 mr-3 mt-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="drawer-side">
+    <label for="my-drawer-3" class="drawer-overlay"></label>
+    <ul class="menu p-4 w-80 bg-base-100">
+      <!-- Sidebar content here -->
+      <!-- <li><a>Sidebar Item 1</a></li>
+      <li><a>Sidebar Item 2</a></li> -->
+
+    </ul>
+
+  </div>
+</div>
+
+
+<!-- MODAL UPDATE PROFILE -->
+<input type="checkbox" class="modal-toggle" [(ngModel)]="isOpenedModal" />
+<div class="modal">
+  <form class="modal-box w-11/12 max-w-5xl" [formGroup]="userForm" enctype="multipart/form-data" (ngSubmit)="submitForm(userForm.value)">
+    <h3 class="font-bold text-lg">{{ textCreateUpdate }}</h3>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1">
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">User Name</span>
+        </label>
+        <input type="text" formControlName="userName" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">First Name</span>
+        </label>
+        <input type="text" formControlName="firstName" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Last Name</span>
+        </label>
+        <input type="text" formControlName="lastName" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" formControlName="password" class="input input-bordered w-full max-w-xs" [required]="textCreateUpdate == 'Buat User'"/>
+      </div>
+
+      <input type="hidden" formControlName="roleId" [value]="user.roleId">
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Image For User</span>
+        </label>
+        <input type="file" formControlName="img" accept="image/*" class="file-input file-input-bordered w-full max-w-xs" (change)="fileProgress($event)"/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label cursor-pointer mt-9">
+          <span class="label-text">Active</span>
+          <input formControlName="isActive" type="checkbox" class="checkbox" />
+        </label>
+      </div>
+
+    </div>
+
+    <div class="modal-action">
+      <button type="submit" class="btn btn-primary">Simpan</button>
+      <button type="button" class="btn btn-neutral" (click)="closeModal()">Tutup</button>
+    </div>
+  </form>
+</div>

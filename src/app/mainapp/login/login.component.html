@@ -1,0 +1,30 @@
+<div class="h-screen flex items-center justify-center">
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <h1 class="card-title justify-center">Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="card-body">
+
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Username</span>
+        </label>
+        <input type="text" formControlName="username" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" formControlName="password" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="card-actions mt-5">
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">Login</button>
+      </div>
+      <!-- <div class="card-actions mt-5">
+        <button type="button" (click)="checkAuth()" class="btn btn-primary btn-block">Check Auth</button>
+      </div> -->
+    </form>
+  </div>
+
+
+</div>

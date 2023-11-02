@@ -1,0 +1,73 @@
+<input type="checkbox" class="modal-toggle" [(ngModel)]="isOpenedModal" />
+<div class="modal ">
+  <form class="modal-box w-11/12 max-w-5xl" [formGroup]="userForm" enctype="multipart/form-data" (ngSubmit)="submitForm(userForm.value)">
+    <h3 class="font-bold text-lg">{{ textCreateUpdate }}</h3>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1">
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">User Name</span>
+        </label>
+        <input type="text" formControlName="userName" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
+        <input type="text" formControlName="email" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">First Name</span>
+        </label>
+        <input type="text" formControlName="firstName" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Last Name</span>
+        </label>
+        <input type="text" formControlName="lastName" class="input input-bordered w-full max-w-xs" required/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" formControlName="password" class="input input-bordered w-full max-w-xs" [required]="textCreateUpdate == 'Buat User'"/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Role</span>
+        </label>
+        <select formControlName="roleId" class="select select-bordered" *ngIf="hasLoadRole" required>
+          <option *ngFor="let rl of roles" value="{{ rl.id }}">{{ rl.roleName }}</option>
+        </select>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label">
+          <span class="label-text">Image For User</span>
+        </label>
+        <input type="file" formControlName="img" accept="image/*" class="file-input file-input-bordered w-full max-w-xs" (change)="fileProgress($event)"/>
+      </div>
+
+      <div class="form-control w-full px-2">
+        <label class="label cursor-pointer mt-9">
+          <span class="label-text">Active</span>
+          <input formControlName="isActive" type="checkbox" class="checkbox" />
+        </label>
+      </div>
+
+    </div>
+
+    <div class="modal-action">
+      <button type="submit" class="btn btn-primary">Simpan</button>
+      <button type="button" class="btn btn-neutral" (click)="cCloseModal()">Tutup</button>
+    </div>
+  </form>
+</div>

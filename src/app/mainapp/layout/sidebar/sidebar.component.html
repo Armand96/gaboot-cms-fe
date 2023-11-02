@@ -1,0 +1,46 @@
+<div class="drawer">
+  <input id="my-drawer" type="checkbox" class="drawer-toggle" [(ngModel)]="isDrawerOpen" />
+  <div class="drawer-content">
+    <!-- Page content here -->
+    <app-topnavbar [user]="user"></app-topnavbar>
+  </div>
+  <div class="drawer-side">
+    <label for="my-drawer" class="drawer-overlay"></label>
+    <ul class="menu p-4 w-80 bg-base-100 text-base-content">
+      <li class="mb-1 rounded hover:bg-primary hover:text-white"
+        [ngClass]="{'bg-primary text-white': router.url == '/'}" routerLink="/" (click)="home()">
+        <div class="flex justify-normal">
+          <i class="fa-solid fa-house-chimney"></i>
+          <a>Home</a>
+        </div>
+      </li>
+      <!-- Sidebar content here -->
+      <div *ngIf="hasLoad">
+        <div *ngFor="let menu of user.role.menus; let i = index">
+          <div class="dropdown btn-block">
+            <li tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
+              [ngClass]="{'bg-primary text-white': currentMenuId == menu.menu.id }">
+              <div class="flex justify-normal">
+                <i class="{{ menu.menu.menuIcon }}"></i>
+                <a>{{ menu.menu.menuName }}</a>
+              </div>
+            </li>
+            <ul tabindex="{{i}}" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              *ngIf="menu.menu.menuHaveChild">
+              <div *ngFor="let subm of menu.submenus">
+                <li class="rounded mb-1" [ngClass]="{'bg-primary text-white': router.url == subm.submenu.frontendUrl }"
+                  routerLink="{{ subm.submenu.frontendUrl }}" (click)="afterClickMenu(subm.submenu.menuId)">
+                  <div class="flex justify-normal">
+                    <i class="{{ subm.submenu.submenuIcon }}"></i>
+                    <a>{{ subm.submenu.submenuName }}</a>
+                  </div>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </ul>
+  </div>
+</div>
