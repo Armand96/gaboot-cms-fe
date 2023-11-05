@@ -1,1 +1,97 @@
-<p>products works!</p>
+<div>
+    <div class="flex">
+      <h3 class="text-2xl mb-2">Daftar Product</h3>
+      <button class="btn btn-primary ml-auto mb-2" (click)="create()">Buat</button>
+    </div>
+  
+    <div class="collapse bg-base-200">
+      <input type="checkbox">
+      <div class="collapse-title text-xl font-medium">
+        Pencarian
+      </div>
+      <div class="collapse-content flex mb-5">
+        <div class="form-control px-2">
+          <label class="label">
+            <span class="label-text">Nama Product</span>
+          </label>
+          <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.userName" />
+        </div>
+  
+        <!-- <div class="w-full"></div> -->
+  
+        <div class="form-control px-2">
+          <label class="label">
+            <span class="label-text">Deskripsi</span>
+          </label>
+          <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.fullName" />
+        </div>
+  
+        <button class="btn btn-primary mt-9" (click)="search()">Search</button>
+      </div>
+  
+    </div>
+  
+    <div class="overflow-x-auto">
+      <table class="table border w-full">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th>Dimension</th>
+            <th>Weight</th>
+            <th>Weight Unit</th>
+            <th>Product Category</th>
+            <th>Last Updated</th>
+            <th>Created Date</th>
+            <th class="text-center">Active</th>
+            <th class="text-center">Image</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+  
+          <tr class="hover"
+            *ngFor="let product of products | paginate: { id:'productPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
+            <th>{{ product.id }}</th>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.dimension }}</td>
+            <td>{{ product.weight }}</td>
+            <td>{{ product.weightUnit }}</td>
+            <td>{{ product.categoryId }}</td>
+            <td>{{ product.createdAt }}</td>
+            <td>{{ product.updatedAt }}</td>
+            <td class="text-center">
+              <i class="fa-solid fa-check text-xl text-accent" *ngIf="true"></i>
+              <!-- <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!product.isActive"></i> -->
+            </td>
+            <td class="avatar flex justify-center items-center">
+              <div class="w-20 rounded"><img src="{{ api.baseUrl }}user/image/thumb/{{ product.id }}" loading="lazy" /></div>
+            </td>
+            <td>
+              <div class="flex justify-center items-center">
+                <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
+                <button class="btn btn-primary mx-1" (click)="edit(product.id)">Ubah</button>
+                <button class="btn btn-warning mx-1" (click)="delete(product)">Hapus</button>
+              </div>
+            </td>
+          </tr>
+  
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="text-center mt-5">
+      <pagination-controls (pageChange)="onPageChange($event)" id="userPage"></pagination-controls>
+    </div>
+  </div>
+  
+  <!-- <app-user-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
+    [textCreateUpdate]="operationMode" [selectedUser]="selectedUser"></app-user-modal-create-update>
+  <app-user-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
+    [User]="selectedUser"></app-user-modal-delete> -->
+  
