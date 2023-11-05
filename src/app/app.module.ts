@@ -15,7 +15,6 @@ import { LoadingComponent } from './mainapp/layout/loading/loading.component';
 import { NotfoundComponent } from './mainapp/layout/notfound/notfound.component';
 import { SidebarComponent } from './mainapp/layout/sidebar/sidebar.component';
 import { TopnavbarComponent } from './mainapp/layout/topnavbar/topnavbar.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +23,7 @@ import { TopnavbarComponent } from './mainapp/layout/topnavbar/topnavbar.compone
     LoadingComponent,
     NotfoundComponent,
     SidebarComponent,
-    TopnavbarComponent
+    TopnavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,7 @@ import { TopnavbarComponent } from './mainapp/layout/topnavbar/topnavbar.compone
     {
       provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true
     },
-    { provide: LOCALE_ID, useValue: "id-ID" }
+    // { provide: LOCALE_ID, useValue: "id-ID" }
   ],
   bootstrap: [AppComponent]
 })

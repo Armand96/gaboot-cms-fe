@@ -1,1 +1,78 @@
-<p>submenu works!</p>
+<input type="checkbox" class="modal-toggle" id="submenu" [(ngModel)]="isOpenedModal" />
+<div class="modal ">
+  <div class="modal-box w-11/12 max-w-6xl">
+    <div class="flex">
+      <h3 class="text-2xl mb-2">Daftar Submenus</h3>
+      <button class="btn btn-primary ml-auto mb-2" (click)="create()">Buat</button>
+    </div>
+
+    <div class="collapse bg-base-200">
+      <input type="checkbox">
+      <div class="collapse-title text-xl font-medium">
+        Pencarian
+      </div>
+      <div class="collapse-content grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 mb-5">
+        <div class="form-control w-full px-2">
+          <label class="label">
+            <span class="label-text">Submenu Name</span>
+          </label>
+          <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.submenuName" />
+        </div>
+
+        <div class="w-full"></div>
+        <button class="btn btn-primary mt-9 lg:ml-auto" (click)="loadSubmData(dataSearch)">Cari</button>
+      </div>
+
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="table border w-full">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Submenu Name</th>
+            <th class="text-center">Submenu Icon</th>
+            <th class="text-center">Active</th>
+            <th class="text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="hover"
+            *ngFor="let sm of submenus | paginate: { id:'submenuPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
+            <th>{{ sm.id }}</th>
+            <td>{{ sm.submenuName }}</td>
+            <td class="text-center">
+              <i [ngClass]="sm.submenuIcon"></i>
+            </td>
+            <td class="text-center">
+              <i class="fa-solid fa-check text-xl text-accent" *ngIf="sm.submenuIsActive"></i>
+              <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!sm.submenuIsActive"></i>
+            </td>
+            <td>
+              <div class="flex justify-center items-center">
+                <button class="btn btn-primary mx-1" (click)="edit(sm.id)">Ubah</button>
+                <button class="btn btn-warning mx-1" (click)="delete(sm)">Hapus</button>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center mt-5">
+      <pagination-controls (pageChange)="onPageChange($event)" id="submenuPage"></pagination-controls>
+    </div>
+
+    <div class="modal-action">
+      <button class="btn btn-secondary" (click)="cCloseModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<app-submenu-modal-create-update [textCreateUpdate]="operationMode" [isOpenedModal]="isOpenModalCru"
+  (modalEvent)="pCloseModalCru($event)" [selectedSubmenu]="selectedSubmenu"></app-submenu-modal-create-update>
+<app-submenu-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
+  [Submenu]="selectedSubmenu"></app-submenu-modal-delete>

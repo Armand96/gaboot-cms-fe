@@ -1,0 +1,101 @@
+<input type="checkbox" class="modal-toggle" [(ngModel)]="isOpenedModal" />
+<div class="modal ">
+  <form class="modal-box w-11/12 max-w-3xl" [formGroup]="roleForm" (ngSubmit)="submitForm(roleForm.value)">
+    <h3 class="font-bold text-lg">{{ textCreateUpdate }}</h3>
+
+    <div class="grid grid-cols-1">
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Role Name</span>
+        </label>
+        <input type="text" formControlName="roleName" class="input input-bordered w-full max-w" required />
+      </div>
+
+      <div class="divider">Role Access</div>
+
+      <div formArrayName="roleMenus">
+        <div *ngFor="let employee of menuz().controls; let menuIndex = index">
+          <div [formGroupName]="menuIndex">
+
+            <div class="form-control" [ngClass]="{'grid grid-cols-5': !menus[menuIndex].menuHaveChild}">
+              <label class="cursor-pointer flex">
+                <p class="label-text mr-3 ">{{ menus[menuIndex].menuName }} <b>:</b> </p>
+                <!-- <input type="hidden" formControlName="menuId" [value]="menus[menuIndex].id"
+                  class="checkbox" *ngIf="menus[menuIndex].menuHaveChild" /> -->
+                <input type="hidden" formControlName="menuId" [value]="menus[menuIndex].id">
+                <input type="checkbox" formControlName="isChecked" class="checkbox" />
+              </label>
+
+              <label class="cursor-pointer flex" *ngIf="!menus[menuIndex].menuHaveChild">
+                <p class="label-text mr-2">Buat</p>
+                <input type="checkbox" class="checkbox" formControlName="createz" />
+              </label>
+
+              <label class="cursor-pointer flex" *ngIf="!menus[menuIndex].menuHaveChild">
+                <p class="label-text mr-2">Read</p>
+                <input type="checkbox" class="checkbox" formControlName="readz" />
+              </label>
+
+              <label class="cursor-pointer flex" *ngIf="!menus[menuIndex].menuHaveChild">
+                <p class="label-text mr-2">Update</p>
+                <input type="checkbox" class="checkbox" formControlName="updatez" />
+              </label>
+
+              <label class="cursor-pointer flex" *ngIf="!menus[menuIndex].menuHaveChild">
+                <p class="label-text mr-2">Hapus</p>
+                <input type="checkbox" class="checkbox" formControlName="deletez" />
+              </label>
+            </div>
+
+            <div class="ml-5" formArrayName="roleSubmenus">
+              <div *ngFor="
+                  let skill of submenusForm(menuIndex).controls;
+                  let submIndex = index
+                ">
+                <div class="divider m-0"></div>
+                <div class="form-control grid grid-cols-5 mb-1" [formGroupName]="submIndex">
+
+                  <label class="cursor-pointer flex">
+                    <p class="label-text mr-2">{{ menus[menuIndex].submenus[submIndex].submenuName }} <b>:</b> </p>
+                    <input type="hidden" formControlName="menuId" [value]="menus[menuIndex].submenus[submIndex].menuId">
+                    <input type="hidden" formControlName="submenuId" [value]="menus[menuIndex].submenus[submIndex].id">
+                    <input type="checkbox" formControlName="isChecked" class="checkbox" />
+                  </label>
+
+                  <label class="cursor-pointer flex">
+                    <p class="label-text mr-2">Buat</p>
+                    <input type="checkbox" class="checkbox" formControlName="createz" />
+                  </label>
+
+                  <label class="cursor-pointer flex">
+                    <p class="label-text mr-2">Read</p>
+                    <input type="checkbox" class="checkbox" formControlName="readz" />
+                  </label>
+
+                  <label class="cursor-pointer flex">
+                    <p class="label-text mr-2">Update</p>
+                    <input type="checkbox" class="checkbox" formControlName="updatez" />
+                  </label>
+
+                  <label class="cursor-pointer flex">
+                    <p class="label-text mr-2">Hapus</p>
+                    <input type="checkbox" class="checkbox" formControlName="deletez" />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <br>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-action">
+      <button type="submit" class="btn btn-primary">Simpan</button>
+      <button type="button" class="btn btn-neutral" (click)="cCloseModal()">Tutup</button>
+    </div>
+  </form>
+</div>

@@ -1,12 +1,12 @@
 export class RoleAccess {
   backendUrl: string = "";
-  create: boolean = false;
-  delete: boolean = false;
+  createz: boolean = false;
+  deletez: boolean = false;
   frontendUrl: string = "";
   id: number = 0;
   menuId: number = 0;
-  read: boolean = false;
+  readz: boolean = false;
   roleId: number = 0;
   submenuId: number = 0;
-  update: boolean = false;
+  updatez: boolean = false;
 }

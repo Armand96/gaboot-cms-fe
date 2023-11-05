@@ -1,7 +1,8 @@
 import { Submenu } from "../../submenu/interface/submenu";
+import { MenuAccess } from "./menu-access";
 
 export class Menu {
-  // access: IMenuAccess;
+  access: MenuAccess = {} as MenuAccess;
   id:number = 0;
   menuId:number = 0;
   menuName: string = "";

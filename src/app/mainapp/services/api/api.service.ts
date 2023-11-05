@@ -59,10 +59,11 @@ export class ApiService {
       timeOut: 5000
     });
 
-    if(error.status == 401) {
-      localStorage.clear();
-      this.router.navigateByUrl('/login');
-    }
+    /* UNATHORIZED */
+    // if(error.status == 401) {
+    //   localStorage.clear();
+    //   this.router.navigateByUrl('/login');
+    // }
   }
 
   /* CONVERT OBJECT TO GET PARAMS */
