@@ -1,3 +1,5 @@
+import { RoleAccess } from "../../role/interface/role-access";
+
 export class Submenu {
   backendUrl: string = "";
   frontendUrl: string = "";
@@ -6,4 +8,5 @@ export class Submenu {
   submenuIcon: string = "";
   submenuIsActive: boolean = false;
   submenuName: string = "";
+  access: RoleAccess = {} as RoleAccess;
 }
