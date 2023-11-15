@@ -29,7 +29,7 @@ export class RootComponent {
 
     this.obs.subscribe({
       next: (resp) => {
-        // console.log('response', resp);
+        console.log('response', resp);
 
         if (resp) isLoggedIn = true;
         else isLoggedIn = false

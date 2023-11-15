@@ -18,14 +18,16 @@ export class AuthService {
   baseUrl: string = "auth/";
   loginUrl: string = "login";
   checkUrl: string = "check";
+  logoutUrl: string = "logout";
 
   login(data: LoginDto) {
     return this.api.postAPI<LoginResponse>(this.baseUrl + this.loginUrl, data);
   }
 
   logout() {
+    this.api.getAPI(this.baseUrl+this.logoutUrl).subscribe().unsubscribe();
+    this.router.navigateByUrl('/login');
     localStorage.clear();
-    this.router.navigateByUrl('/login')
   }
 
   getLocalStorageToken(): string {

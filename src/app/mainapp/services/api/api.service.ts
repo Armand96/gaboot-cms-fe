@@ -60,10 +60,10 @@ export class ApiService {
     });
 
     /* UNATHORIZED */
-    // if(error.status == 401) {
-    //   localStorage.clear();
-    //   this.router.navigateByUrl('/login');
-    // }
+    if(error.status == 401) {
+      // localStorage.clear();
+      // this.router.navigateByUrl('/login');
+    }
   }
 
   /* CONVERT OBJECT TO GET PARAMS */
