@@ -1,83 +1,83 @@
 <div>
-  <div class="flex">
-    <h3 class="text-2xl mb-2">Daftar Menus</h3>
-    <button class="btn btn-primary ml-auto mb-2" (click)="create()">Buat</button>
-  </div>
-
-  <div class="collapse bg-base-200">
-    <input type="checkbox">
-    <div class="collapse-title text-xl font-medium">
-      Pencarian
-    </div>
-    <div class="collapse-content grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 mb-5">
-      <div class="form-control w-full px-2">
-        <label class="label">
-          <span class="label-text">Menu Name</span>
-        </label>
-        <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.menuName" />
-      </div>
-
-      <div class="w-full"></div>
-
-      <button class="btn btn-primary mt-9 lg:ml-auto" (click)="search()">Cari</button>
+    <div class="flex">
+        <h3 class="text-2xl mb-2">Daftar Menus</h3>
+        <button class="btn btn-primary ml-auto mb-2" (click)="create()">Buat</button>
     </div>
 
-  </div>
-
-  <div class="overflow-x-auto">
-    <table class="table border w-full">
-      <!-- head -->
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Menu Name</th>
-          <th class="text-center">Menu Icon</th>
-          <th class="text-center">Submenu</th>
-          <th class="text-center">Active</th>
-          <th class="text-center">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <tr class="hover"
-          *ngFor="let mn of menus | paginate: { id:'menusPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-          <th>{{ mn.id }}</th>
-          <td>{{ mn.menuName }}</td>
-          <td class="text-center">
-            <i class="{{ mn.menuIcon }}"></i>
-          </td>
-          <td class="text-center">
-            <button class="btn btn-primary" *ngIf="mn.menuHaveChild" (click)="openSub(mn.id)">
-              <i class="fas fa-folder-tree"></i>
-            </button>
-            <i class="fas fa-folder-closed" *ngIf="!mn.menuHaveChild"></i>
-          </td>
-          <td class="text-center">
-            <i class="fa-solid fa-check text-xl text-accent" *ngIf="mn.menuIsActive"></i>
-            <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!mn.menuIsActive"></i>
-          </td>
-          <td>
-            <div class="flex justify-center items-center">
-              <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
-              <button class="btn btn-primary mx-1" (click)="edit(mn.id)">Ubah</button>
-              <button class="btn btn-warning mx-1" (click)="delete(mn)">Hapus</button>
+    <div class="collapse bg-base-200">
+        <input type="checkbox">
+        <div class="collapse-title text-xl font-medium">
+            Pencarian
+        </div>
+        <div class="collapse-content grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 mb-5">
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Menu Name</span>
+                </label>
+                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.menuName" />
             </div>
-          </td>
-        </tr>
 
-      </tbody>
-    </table>
-  </div>
+            <div class="w-full"></div>
 
-  <div class="text-center mt-5">
-    <pagination-controls (pageChange)="onPageChange($event)" id="menusPage"></pagination-controls>
-  </div>
+            <button class="btn btn-primary mt-9 lg:ml-auto" (click)="search()">Cari</button>
+        </div>
+
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="table border w-full">
+            <!-- head -->
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Menu Name</th>
+                    <th class="text-center">Menu Icon</th>
+                    <th class="text-center">Submenu</th>
+                    <th class="text-center">Active</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="hover"
+                    *ngFor="let mn of menus | paginate: { id:'menusPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
+                    <th>{{ mn.id }}</th>
+                    <td>{{ mn.menuName }}</td>
+                    <td class="text-center">
+                        <i class="{{ mn.menuIcon }}"></i>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-primary" *ngIf="mn.menuHaveChild" (click)="openSub(mn.id)">
+                            <i class="fas fa-folder-tree"></i>
+                        </button>
+                        <i class="fas fa-folder-closed" *ngIf="!mn.menuHaveChild"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="mn.menuIsActive"></i>
+                        <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!mn.menuIsActive"></i>
+                    </td>
+                    <td>
+                        <div class="flex justify-center items-center">
+                            <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
+                            <button class="btn btn-primary mx-1" (click)="edit(mn.id)">Ubah</button>
+                            <button class="btn btn-warning mx-1" (click)="delete(mn)">Hapus</button>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-5">
+        <pagination-controls (pageChange)="onPageChange($event)" id="menusPage"></pagination-controls>
+    </div>
 </div>
 
 <app-menu-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
-  [textCreateUpdate]="operationMode" [selectedMenu]="selectedMenu"></app-menu-modal-create-update>
+    [textCreateUpdate]="operationMode" [selectedMenu]="selectedMenu"></app-menu-modal-create-update>
 <app-menu-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
-  [Menu]="selectedMenu"></app-menu-modal-delete>
+    [Menu]="selectedMenu"></app-menu-modal-delete>
 
 <app-submenu [isOpenedModal]="isOpenModalSubmenu" (modalEvent)="pCloseModalSubm($event)"
-  [selectedMenuId]="selectedMenuIdForSub"></app-submenu>
+    [selectedMenuId]="selectedMenuIdForSub"></app-submenu>

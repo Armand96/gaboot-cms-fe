@@ -1,4 +1,4 @@
-const constCreateSubmenu = "Buat Submenu";
-const constUpdateSubmenu = "Ubah Submenu";
+const constCreateSubmenu = 'Buat Submenu';
+const constUpdateSubmenu = 'Ubah Submenu';
 
 export { constCreateSubmenu, constUpdateSubmenu };

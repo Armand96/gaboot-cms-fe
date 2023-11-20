@@ -7,20 +7,18 @@ import { RoleModalDeleteComponent } from './role-modal-delete/role-modal-delete.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
-
 @NgModule({
-  declarations: [
-    RoleComponent,
-    RoleModalCreateUpdateComponent,
-    RoleModalDeleteComponent
-  ],
-  imports: [
-    CommonModule,
-    RoleRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxPaginationModule
-  ]
+    declarations: [
+        RoleComponent,
+        RoleModalCreateUpdateComponent,
+        RoleModalDeleteComponent,
+    ],
+    imports: [
+        CommonModule,
+        RoleRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+    ],
 })
-export class RoleModule { }
+export class RoleModule {}

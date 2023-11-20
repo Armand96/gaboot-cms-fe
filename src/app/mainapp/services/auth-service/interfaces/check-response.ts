@@ -1,4 +1,4 @@
 export interface CheckResponse {
-  userId: number,
-  username: string
+    userId: number;
+    username: string;
 }

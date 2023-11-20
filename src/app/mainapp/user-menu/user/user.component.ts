@@ -7,104 +7,100 @@ import { ResponseSuccess } from '../../services/interfaces/response.dto';
 import { constCreateUser, constUpdateUser } from './const-user';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit, OnDestroy{
+export class UserComponent implements OnInit, OnDestroy {
+    constructor(
+        private usrSvc: UserService,
+        public api: ApiService,
+    ) {}
 
-  constructor(
-    private usrSvc: UserService,
-    public api: ApiService,
-  ) { }
+    userObservable = new Observable<ResponseSuccess<User>>();
+    users = [] as User[];
+    hasLoadUser: boolean = false;
 
-  userObservable = new Observable<ResponseSuccess<User>>();
-  users = [] as User[];
-  hasLoadUser: boolean = false;
+    selectedIdUser: number = 0;
+    selectedUser = new Subject<User>();
+    operationMode: string = '';
+    isOpenModalCru: boolean = false;
+    isOpenModalDel: boolean = false;
 
-  selectedIdUser: number = 0;
-  selectedUser = new Subject<User>();
-  operationMode: string = '';
-  isOpenModalCru: boolean = false;
-  isOpenModalDel: boolean = false;
+    /* FILTER PARAMETER */
+    totalData = 0;
+    dataSearch: any = {
+        page: 1,
+        limit: 10,
+        userName: '',
+        fullName: '',
+    };
 
-  /* FILTER PARAMETER */
-  totalData = 0;
-  dataSearch: any = {
-    page: 1,
-    limit: 10,
-    userName: "",
-    fullName: ""
-  };
+    ngOnInit(): void {
+        this.userObservable = this.usrSvc.getUsers();
+        this.search();
+    }
 
-  ngOnInit(): void {
-    this.userObservable = this.usrSvc.getUsers();
-    this.search();
+    ngOnDestroy(): void {
+        this.selectedUser.unsubscribe();
+    }
 
-  }
+    /* ====================================== */
 
-  ngOnDestroy(): void {
-    this.selectedUser.unsubscribe();
-  }
+    search() {
+        const stringParams = this.api.searchParam(this.dataSearch);
 
-  /* ====================================== */
+        this.usrSvc.getUsers(stringParams).subscribe({
+            next: (resp) => {
+                this.users = resp.data;
+                this.totalData = resp.totalData;
+                this.hasLoadUser = true;
+                // this.api.successToastr(resp.message, 'Success');
+            },
+            error: this.api.errorHandler,
+        });
+    }
 
-  search() {
+    onPageChange(page: number) {
+        this.dataSearch.page = page;
+        this.search();
+    }
 
-    let stringParams = this.api.searchParam(this.dataSearch);
-
-    this.usrSvc.getUsers(stringParams).subscribe({
-      next: (resp) => {
-        this.users = resp.data;
-        this.totalData = resp.totalData;
-        this.hasLoadUser = true;
-        // this.api.successToastr(resp.message, 'Success');
-      },
-      error: this.api.errorHandler
-    });
-  }
-
-  onPageChange(page: number) {
-    this.dataSearch.page = page;
-    this.search();
-  }
-
-  /* CREATE MODAL */
-  create() {
-    this.isOpenModalCru = true;
-    this.operationMode = constCreateUser;
-    this.selectedUser.next({} as User);
-  }
-
-  /* EDIT MODAL */
-  edit(id: number) {
-    this.selectedIdUser = id;
-    this.usrSvc.getUser(id).subscribe({
-      next: res => {
-        this.selectedUser.next(res.datum);
-        this.operationMode = constUpdateUser;
+    /* CREATE MODAL */
+    create() {
         this.isOpenModalCru = true;
-      },
-      error: this.api.errorHandler
-    });
-  }
+        this.operationMode = constCreateUser;
+        this.selectedUser.next({} as User);
+    }
 
-  /* OPEN DELETE MODAL */
-  delete(user: User) {
-    this.isOpenModalDel = true;
-    this.selectedUser.next(user);
-  }
+    /* EDIT MODAL */
+    edit(id: number) {
+        this.selectedIdUser = id;
+        this.usrSvc.getUser(id).subscribe({
+            next: (res) => {
+                this.selectedUser.next(res.datum);
+                this.operationMode = constUpdateUser;
+                this.isOpenModalCru = true;
+            },
+            error: this.api.errorHandler,
+        });
+    }
 
-  /* CLOSE MODAL CREATE UPDATE */
-  pCloseModalCru(value: boolean) {
-    this.isOpenModalCru = value;
-    this.search();
-  }
+    /* OPEN DELETE MODAL */
+    delete(user: User) {
+        this.isOpenModalDel = true;
+        this.selectedUser.next(user);
+    }
 
-  /* CLOSE MODAL DELETE */
-  pCloseModalDel(value: boolean) {
-    this.isOpenModalDel = value;
-    this.search();
-  }
+    /* CLOSE MODAL CREATE UPDATE */
+    pCloseModalCru(value: boolean) {
+        this.isOpenModalCru = value;
+        this.search();
+    }
 
+    /* CLOSE MODAL DELETE */
+    pCloseModalDel(value: boolean) {
+        this.isOpenModalDel = value;
+        this.search();
+    }
 }

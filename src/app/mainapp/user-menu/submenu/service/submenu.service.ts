@@ -6,35 +6,42 @@ import { ResponseSuccess } from 'src/app/mainapp/services/interfaces/response.dt
 import { Submenu } from '../interface/submenu';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class SubmenuService {
+    constructor(
+        private api: ApiService,
+        private auth: AuthService,
+    ) {}
+    private baseUrl: string = 'submenu/';
+    private baseUrl2: string = 'submenu';
 
-  constructor(private api: ApiService, private auth: AuthService) { }
-  private baseUrl: string = "submenu/";
-  private baseUrl2: string = "submenu";
+    getSubmenus() {
+        return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl);
+    }
 
-  getSubmenus() {
-    return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl);
-  }
+    getSubmenu(id: number) {
+        return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl + id);
+    }
 
-  getSubmenu(id: number) {
-    return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl + id);
-  }
+    getSubmenusByMenuId(menuId: number, params = '') {
+        return this.api.getAPI<ResponseSuccess<Submenu>>(
+            this.baseUrl + 'menu/' + menuId + params,
+        );
+    }
 
-  getSubmenusByMenuId(menuId: number, params = "") {
-    return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl + 'menu/' + menuId + params);
-  }
+    createSubmenu(data: CreateSubmenuDto) {
+        return this.api.postAPI<ResponseSuccess<Submenu>>(this.baseUrl, data);
+    }
 
-  createSubmenu(data: CreateSubmenuDto) {
-    return this.api.postAPI<ResponseSuccess<Submenu>>(this.baseUrl, data);
-  }
+    updateSubmenu(id: number, data: CreateSubmenuDto) {
+        return this.api.patchAPI<ResponseSuccess<Submenu>>(
+            this.baseUrl + id,
+            data,
+        );
+    }
 
-  updateSubmenu(id: number, data: CreateSubmenuDto) {
-    return this.api.patchAPI<ResponseSuccess<Submenu>>(this.baseUrl + id, data);
-  }
-
-  deleteSubmenu(id: number) {
-    return this.api.deleteAPI<ResponseSuccess<Submenu>>(this.baseUrl + id);
-  }
+    deleteSubmenu(id: number) {
+        return this.api.deleteAPI<ResponseSuccess<Submenu>>(this.baseUrl + id);
+    }
 }

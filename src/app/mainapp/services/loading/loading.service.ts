@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class LoadingService {
+    public isLoading: boolean = false;
 
-  public isLoading: boolean = false;
+    constructor() {}
 
-  constructor() { }
+    setLoading(loading: boolean) {
+        this.isLoading = loading;
+    }
 
-  setLoading(loading: boolean) {
-    this.isLoading = loading;
-  }
-
-  getLoading(): boolean {
-    return this.isLoading;
-  }
+    getLoading(): boolean {
+        return this.isLoading;
+    }
 }

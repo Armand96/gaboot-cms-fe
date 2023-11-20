@@ -6,114 +6,113 @@ import { MenuService } from './service/menu.service';
 import { Menu } from './interface/menu';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit, OnDestroy {
-  constructor(
-    private api: ApiService,
-    private menuSvc: MenuService,
-  ) { }
+    constructor(
+        private api: ApiService,
+        private menuSvc: MenuService,
+    ) {}
 
-  menus = [] as Menu[];
-  hasLoad: boolean = false;
-  operationMode: string = '';
-  isOpenModalCru: boolean = false;
-  isOpenModalDel: boolean = false;
-  isOpenModalSubmenu: boolean = false;
+    menus = [] as Menu[];
+    hasLoad: boolean = false;
+    operationMode: string = '';
+    isOpenModalCru: boolean = false;
+    isOpenModalDel: boolean = false;
+    isOpenModalSubmenu: boolean = false;
 
-  selectedMenu = new Subject<Menu>();
-  selectedMenuIdForSub = new Subject<number>();
+    selectedMenu = new Subject<Menu>();
+    selectedMenuIdForSub = new Subject<number>();
 
-  /* FILTER PARAMETER */
-  totalData = 0;
-  dataSearch: any = {
-    page: 1,
-    limit: 10,
-    menuName: "",
-  };
+    /* FILTER PARAMETER */
+    totalData = 0;
+    dataSearch: any = {
+        page: 1,
+        limit: 10,
+        menuName: '',
+    };
 
-  ngOnInit(): void {
-    this.search();
-  }
+    ngOnInit(): void {
+        this.search();
+    }
 
-  ngOnDestroy(): void {
-    this.selectedMenu.unsubscribe();
-    this.selectedMenuIdForSub.unsubscribe();
-  }
+    ngOnDestroy(): void {
+        this.selectedMenu.unsubscribe();
+        this.selectedMenuIdForSub.unsubscribe();
+    }
 
-  /* ==================================================== */
-  search() {
+    /* ==================================================== */
+    search() {
+        const paramsString = this.api.searchParam(this.dataSearch);
+        this.menuSvc.getMenus(paramsString).subscribe({
+            next: (res) => {
+                this.menus = res.data;
+                this.hasLoad = true;
+                this.totalData = res.totalData;
+                this.api.successToastr(res.message, 'Success');
+            },
+            error: this.api.errorHandler,
+        });
+    }
 
-    let paramsString = this.api.searchParam(this.dataSearch);
-    this.menuSvc.getMenus(paramsString).subscribe({
-      next: (res) => {
-        this.menus = res.data;
-        this.hasLoad = true;
-        this.totalData = res.totalData;
-        this.api.successToastr(res.message, 'Success');
-      },
-      error: this.api.errorHandler
-    });
-  }
+    onPageChange(page: number) {
+        this.dataSearch.page = page;
+        this.search();
+    }
 
-  onPageChange(page: number) {
-    this.dataSearch.page = page;
-    this.search();
-  }
-
-  create() {
-    this.isOpenModalCru = true;
-    this.operationMode = constCreateMenu;
-    this.selectedMenu.next({} as Menu);
-  }
-
-  edit(menuId: number) {
-    this.menuSvc.getMenu(menuId).subscribe({
-      next: res => {
-        this.selectedMenu.next(res.datum);
-        this.operationMode = constUpdateMenu;
+    create() {
         this.isOpenModalCru = true;
-      },
-      error: this.api.errorHandler
-    })
-  }
+        this.operationMode = constCreateMenu;
+        this.selectedMenu.next({} as Menu);
+    }
 
-  delete(menu: Menu) {
-    this.isOpenModalDel = true;
-    this.selectedMenu.next(menu);
-  }
+    edit(menuId: number) {
+        this.menuSvc.getMenu(menuId).subscribe({
+            next: (res) => {
+                this.selectedMenu.next(res.datum);
+                this.operationMode = constUpdateMenu;
+                this.isOpenModalCru = true;
+            },
+            error: this.api.errorHandler,
+        });
+    }
 
-  openSub(menuId: number) {
-    this.selectedMenuIdForSub.next(menuId);
-    this.isOpenModalSubmenu = true;
-  }
+    delete(menu: Menu) {
+        this.isOpenModalDel = true;
+        this.selectedMenu.next(menu);
+    }
 
-  /* ==================================================== */
-  /* CLOSE MODAL CREATE UPDATE */
-  pCloseModalCru(value: boolean) {
-    this.isOpenModalCru = value;
-    this.menuSvc.getMenus().subscribe({
-      next: res => {
-        this.menus = res.data;
-      },
-      error: this.api.errorHandler
-    })
-  }
+    openSub(menuId: number) {
+        this.selectedMenuIdForSub.next(menuId);
+        this.isOpenModalSubmenu = true;
+    }
 
-  /* CLOSE MODAL DELETE */
-  pCloseModalDel(value: boolean) {
-    this.isOpenModalDel = value;
-    this.menuSvc.getMenus().subscribe({
-      next: res => {
-        this.menus = res.data;
-      },
-      error: this.api.errorHandler
-    })
-  }
+    /* ==================================================== */
+    /* CLOSE MODAL CREATE UPDATE */
+    pCloseModalCru(value: boolean) {
+        this.isOpenModalCru = value;
+        this.menuSvc.getMenus().subscribe({
+            next: (res) => {
+                this.menus = res.data;
+            },
+            error: this.api.errorHandler,
+        });
+    }
 
-  pCloseModalSubm(value: boolean) {
-    this.isOpenModalSubmenu = value;
-  }
+    /* CLOSE MODAL DELETE */
+    pCloseModalDel(value: boolean) {
+        this.isOpenModalDel = value;
+        this.menuSvc.getMenus().subscribe({
+            next: (res) => {
+                this.menus = res.data;
+            },
+            error: this.api.errorHandler,
+        });
+    }
+
+    pCloseModalSubm(value: boolean) {
+        this.isOpenModalSubmenu = value;
+    }
 }

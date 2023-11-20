@@ -7,20 +7,18 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { UserModalDeleteComponent } from './user-modal-delete/user-modal-delete.component';
 import { UserRoutingModule } from './user-routing.module';
 
-
-
 @NgModule({
-  declarations: [
-    UserComponent,
-    UserModalCreateUpdateComponent,
-    UserModalDeleteComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    UserRoutingModule,
-    ReactiveFormsModule,
-    NgxPaginationModule
-  ]
+    declarations: [
+        UserComponent,
+        UserModalCreateUpdateComponent,
+        UserModalDeleteComponent,
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        UserRoutingModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+    ],
 })
-export class UserModule { }
+export class UserModule {}

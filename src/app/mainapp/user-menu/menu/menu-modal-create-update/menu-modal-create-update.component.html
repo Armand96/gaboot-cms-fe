@@ -1,57 +1,59 @@
 <input type="checkbox" class="modal-toggle" [(ngModel)]="isOpenedModal" />
 <div class="modal ">
-  <form class="modal-box w-11/12 max-w-5xl" [formGroup]="menuForm" (ngSubmit)="submitForm(menuForm.value)">
-    <h3 class="font-bold text-lg">{{ textCreateUpdate }}</h3>
+    <form class="modal-box w-11/12 max-w-5xl" [formGroup]="menuForm" (ngSubmit)="submitForm(menuForm.value)">
+        <h3 class="font-bold text-lg">{{ textCreateUpdate }}</h3>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1">
 
-      <div class="form-control w-full px-2">
-        <label class="label">
-          <span class="label-text">Menu Name</span>
-        </label>
-        <input type="text" formControlName="menuName" class="input input-bordered w-full max-w-xs" required />
-      </div>
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Menu Name</span>
+                </label>
+                <input type="text" formControlName="menuName" class="input input-bordered w-full max-w-xs" required />
+            </div>
 
-      <div class="form-control w-full px-2">
-        <label class="label">
-          <span class="label-text">Menu Icon</span>
-        </label>
-        <input type="text" formControlName="menuIcon" class="input input-bordered w-full max-w-xs" required />
-      </div>
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Menu Icon</span>
+                </label>
+                <input type="text" formControlName="menuIcon" class="input input-bordered w-full max-w-xs" required />
+            </div>
 
-      <div class="form-control w-full px-2">
-        <label class="label">
-          <span class="label-text">Front End URL</span>
-        </label>
-        <input type="text" formControlName="frontendUrl" class="input input-bordered w-full max-w-xs" required />
-      </div>
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Front End URL</span>
+                </label>
+                <input type="text" formControlName="frontendUrl" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
 
-      <div class="form-control w-full px-2">
-        <label class="label">
-          <span class="label-text">Back End URL</span>
-        </label>
-        <input type="text" formControlName="backendUrl" class="input input-bordered w-full max-w-xs" required />
-      </div>
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Back End URL</span>
+                </label>
+                <input type="text" formControlName="backendUrl" class="input input-bordered w-full max-w-xs" required />
+            </div>
 
-      <div class="form-control w-full px-2">
-        <label class="label cursor-pointer mt-9">
-          <span class="label-text">Menu Have Children</span>
-          <input formControlName="menuHaveChild" type="checkbox" class="checkbox" (input)="disableUrl($event.target)" />
-        </label>
-      </div>
+            <div class="form-control w-full px-2">
+                <label class="label cursor-pointer mt-9">
+                    <span class="label-text">Menu Have Children</span>
+                    <input formControlName="menuHaveChild" type="checkbox" class="checkbox"
+                        (input)="disableUrl($event.target)" />
+                </label>
+            </div>
 
-      <div class="form-control w-full px-2">
-        <label class="label cursor-pointer mt-9">
-          <span class="label-text">Active</span>
-          <input formControlName="menuIsActive" type="checkbox" class="checkbox" />
-        </label>
-      </div>
+            <div class="form-control w-full px-2">
+                <label class="label cursor-pointer mt-9">
+                    <span class="label-text">Active</span>
+                    <input formControlName="menuIsActive" type="checkbox" class="checkbox" />
+                </label>
+            </div>
 
-    </div>
+        </div>
 
-    <div class="modal-action">
-      <button type="submit" class="btn btn-primary">Simpan</button>
-      <button type="button" class="btn btn-neutral" (click)="cCloseModal()">Tutup</button>
-    </div>
-  </form>
+        <div class="modal-action">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="button" class="btn btn-neutral" (click)="cCloseModal()">Tutup</button>
+        </div>
+    </form>
 </div>

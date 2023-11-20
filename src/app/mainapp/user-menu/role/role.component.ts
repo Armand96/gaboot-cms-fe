@@ -8,106 +8,104 @@ import { constCreateRole, constUpdateRole } from './role.const';
 import { ResponseSuccess } from '../../services/interfaces/response.dto';
 
 @Component({
-  selector: 'app-role',
-  templateUrl: './role.component.html',
-  styleUrls: ['./role.component.css']
+    selector: 'app-role',
+    templateUrl: './role.component.html',
+    styleUrls: ['./role.component.css'],
 })
 export class RoleComponent implements OnInit, OnDestroy {
+    constructor(
+        private roleSvc: RoleService,
+        public api: ApiService,
+    ) {}
 
-  constructor(
-    private roleSvc: RoleService,
-    public api: ApiService
-  ) { }
+    // subscriptions: Subscription = new Subscription();
+    roles = [] as RoleOnly[];
+    hasLoadRole: boolean = false;
 
-  // subscriptions: Subscription = new Subscription();
-  roles = [] as RoleOnly[];
-  hasLoadRole: boolean = false;
+    selectedIdUser: number = 0;
+    selectedRole = new Subject<RoleDetail>();
+    deletedRole = new Subject<RoleOnly>();
+    operationMode: string = '';
+    isOpenModalCru: boolean = false;
+    isOpenModalDel: boolean = false;
 
-  selectedIdUser: number = 0;
-  selectedRole = new Subject<RoleDetail>();
-  deletedRole = new Subject<RoleOnly>();
-  operationMode: string = '';
-  isOpenModalCru: boolean = false;
-  isOpenModalDel: boolean = false;
+    /* FILTER PARAMETER */
+    totalData = 0;
+    dataSearch: any = {
+        page: 1,
+        limit: 10,
+        roleName: '',
+    };
 
-  /* FILTER PARAMETER */
-  totalData = 0;
-  dataSearch: any = {
-    page: 1,
-    limit: 10,
-    roleName: ""
-  };
+    ngOnInit(): void {
+        this.roleSvc.getRoles().subscribe({
+            next: this.respond,
+            error: this.api.errorHandler,
+        });
+    }
 
-  ngOnInit(): void {
-    this.roleSvc.getRoles().subscribe({
-      next: this.respond,
-      error: this.api.errorHandler,
-    })
-  }
+    ngOnDestroy(): void {
+        this.selectedRole.unsubscribe();
+        this.deletedRole.unsubscribe();
+    }
 
-  ngOnDestroy(): void {
-    this.selectedRole.unsubscribe();
-    this.deletedRole.unsubscribe();
-  }
+    /* ===================================================================================== */
 
-  /* ===================================================================================== */
+    search() {
+        const stringParams = this.api.searchParam(this.dataSearch);
+        this.roleSvc.getRoles(stringParams).subscribe({
+            next: this.respond,
+            error: this.api.errorHandler,
+        });
+    }
 
-  search() {
+    onPageChange(page: number) {
+        this.dataSearch.page = page;
+        this.search();
+    }
 
-    let stringParams = this.api.searchParam(this.dataSearch);
-    this.roleSvc.getRoles(stringParams).subscribe({
-      next: this.respond,
-      error: this.api.errorHandler,
-    })
-  }
-
-  onPageChange(page: number) {
-    this.dataSearch.page = page;
-    this.search();
-  }
-
-  /* CREATE MODAL */
-  create() {
-    this.isOpenModalCru = true;
-    this.operationMode = constCreateRole;
-    this.selectedRole.next({} as RoleDetail);
-  }
-
-  /* EDIT MODAL */
-  edit(id: number) {
-    this.selectedIdUser = id;
-    this.roleSvc.getRole(id).subscribe({
-      next: res => {
-        this.selectedRole.next(res.datum);
-        this.operationMode = constUpdateRole;
+    /* CREATE MODAL */
+    create() {
         this.isOpenModalCru = true;
-      },
-      error: this.api.errorHandler
-    })
-  }
+        this.operationMode = constCreateRole;
+        this.selectedRole.next({} as RoleDetail);
+    }
 
-  /* OPEN DELETE MODAL */
-  delete(role: RoleOnly) {
-    this.isOpenModalDel = true;
-    this.deletedRole.next(role);
-  }
+    /* EDIT MODAL */
+    edit(id: number) {
+        this.selectedIdUser = id;
+        this.roleSvc.getRole(id).subscribe({
+            next: (res) => {
+                this.selectedRole.next(res.datum);
+                this.operationMode = constUpdateRole;
+                this.isOpenModalCru = true;
+            },
+            error: this.api.errorHandler,
+        });
+    }
 
-  /* CLOSE MODAL CREATE UPDATE */
-  pCloseModalCru(value: boolean) {
-    this.isOpenModalCru = value;
-    this.search();
-  }
+    /* OPEN DELETE MODAL */
+    delete(role: RoleOnly) {
+        this.isOpenModalDel = true;
+        this.deletedRole.next(role);
+    }
 
-  /* CLOSE MODAL DELETE */
-  pCloseModalDel(value: boolean) {
-    this.isOpenModalDel = value;
-    this.search();
-  }
+    /* CLOSE MODAL CREATE UPDATE */
+    pCloseModalCru(value: boolean) {
+        this.isOpenModalCru = value;
+        this.search();
+    }
 
-  respond = (res: ResponseSuccess<RoleOnly>) => {
-    this.roles = res.data;
-    this.totalData = res.totalData;;
-    this.hasLoadRole = true;
-    // this.api.successToastr(res.message, 'Success');
-  }
+    /* CLOSE MODAL DELETE */
+    pCloseModalDel(value: boolean) {
+        this.isOpenModalDel = value;
+        this.search();
+    }
+
+    respond = (res: ResponseSuccess<RoleOnly>) => {
+        this.roles = res.data;
+        this.totalData = res.totalData;
+        this.hasLoadRole = true;
+        // this.api.successToastr(res.message, 'Success');
+    };
 }

@@ -3,21 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RoleModalDeleteComponent } from './role-modal-delete.component';
 
 describe('RoleModalDeleteComponent', () => {
-  let component: RoleModalDeleteComponent;
-  let fixture: ComponentFixture<RoleModalDeleteComponent>;
+    let component: RoleModalDeleteComponent;
+    let fixture: ComponentFixture<RoleModalDeleteComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ RoleModalDeleteComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [RoleModalDeleteComponent],
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(RoleModalDeleteComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(RoleModalDeleteComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

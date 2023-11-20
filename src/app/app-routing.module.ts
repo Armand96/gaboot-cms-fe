@@ -5,24 +5,44 @@ import { RootComponent } from './mainapp/root/root.component';
 import { NotfoundComponent } from './mainapp/layout/notfound/notfound.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  {
-    path: '', component: RootComponent, children: [
-      // { path: '', loadChildren: () => import('./main-app/dashboard/dashboard.module').then(m => m.DashboardModule) },
+    { path: 'login', component: LoginComponent },
+    {
+        path: '',
+        component: RootComponent,
+        children: [
+            // { path: '', loadChildren: () => import('./main-app/dashboard/dashboard.module').then(m => m.DashboardModule) },
 
-      /* USER MENU */
-      { path: 'user', loadChildren: () => import('./mainapp/user-menu/user/user.module').then(m => m.UserModule) },
-      { path: 'role', loadChildren: () => import('./mainapp/user-menu/role/role.module').then(m => m.RoleModule) },
-      { path: 'menu', loadChildren: () => import('./mainapp/user-menu/menu/menu.module').then(m => m.MenuModule) },
+            /* USER MENU */
+            {
+                path: 'user',
+                loadChildren: () =>
+                    import('./mainapp/user-menu/user/user.module').then(
+                        (m) => m.UserModule,
+                    ),
+            },
+            {
+                path: 'role',
+                loadChildren: () =>
+                    import('./mainapp/user-menu/role/role.module').then(
+                        (m) => m.RoleModule,
+                    ),
+            },
+            {
+                path: 'menu',
+                loadChildren: () =>
+                    import('./mainapp/user-menu/menu/menu.module').then(
+                        (m) => m.MenuModule,
+                    ),
+            },
 
-      // { path: '**', component: NotfoundComponent }
-    ]
-  },
-  { path: '**', component: NotfoundComponent }
+            // { path: '**', component: NotfoundComponent }
+        ],
+    },
+    { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

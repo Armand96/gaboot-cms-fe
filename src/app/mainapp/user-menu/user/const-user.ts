@@ -1,4 +1,4 @@
-const constCreateUser = "Create User";
-const constUpdateUser = "Update User";
+const constCreateUser = 'Create User';
+const constUpdateUser = 'Update User';
 
-export {constCreateUser, constUpdateUser}
+export { constCreateUser, constUpdateUser };

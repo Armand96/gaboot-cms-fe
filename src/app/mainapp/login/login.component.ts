@@ -8,50 +8,47 @@ import { LoginResponse } from '../services/auth-service/interfaces/login-respons
 import { User } from '../user-menu/user/interface/user';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+    constructor(
+        private api: ApiService,
+        private auth: AuthService,
+        private fb: FormBuilder,
+        private router: Router,
+    ) {}
 
-  constructor(
-    private api: ApiService,
-    private auth: AuthService,
-    private fb: FormBuilder,
-    private router: Router
-  ) { }
+    /* VARIABEL */
+    users: User[] = [];
+    user = {} as User;
+    loginForm = {} as FormGroup;
 
-  /* VARIABEL */
-  users: User[] = [];
-  user = {} as User;
-  loginForm = {} as FormGroup;
+    ngOnInit(): void {
+        this.loginForm = this.fb.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required],
+        });
+    }
 
-  ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+    ngOnDestroy(): void {}
 
-  ngOnDestroy(): void {
+    async login(data: LoginDto) {
+        // console.log(data);
+        this.auth.login(data).subscribe({
+            next: this.successResponseLogin,
+            error: this.api.errorHandler,
+        });
+    }
 
-  }
+    successResponseLogin = (resp: LoginResponse) => {
+        this.api.successToastr('Success Login', 'Success');
+        this.auth.setLocalStorageToken(resp.accessToken);
+        this.router.navigateByUrl('/');
+    };
 
-  async login(data: LoginDto) {
-    // console.log(data);
-    this.auth.login(data).subscribe({
-      next: this.successResponseLogin,
-      error: this.api.errorHandler
-    });
-  }
-
-  successResponseLogin = (resp: LoginResponse) => {
-    this.api.successToastr('Success Login', 'Success');
-    this.auth.setLocalStorageToken(resp.accessToken);
-    this.router.navigateByUrl('/');
-  }
-
-  checkAuth() {
-    this.auth.checkLogin();
-  }
+    checkAuth() {
+        this.auth.checkLogin();
+    }
 }

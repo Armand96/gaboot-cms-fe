@@ -16,31 +16,33 @@ import { NotfoundComponent } from './mainapp/layout/notfound/notfound.component'
 import { SidebarComponent } from './mainapp/layout/sidebar/sidebar.component';
 import { TopnavbarComponent } from './mainapp/layout/topnavbar/topnavbar.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    RootComponent,
-    LoginComponent,
-    LoadingComponent,
-    NotfoundComponent,
-    SidebarComponent,
-    TopnavbarComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ToastNoAnimationModule.forRoot(),
-    NgxPaginationModule
-  ],
-  providers: [
-    ApiService,
-    {
-      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true
-    },
-    // { provide: LOCALE_ID, useValue: "id-ID" }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        RootComponent,
+        LoginComponent,
+        LoadingComponent,
+        NotfoundComponent,
+        SidebarComponent,
+        TopnavbarComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastNoAnimationModule.forRoot(),
+        NgxPaginationModule,
+    ],
+    providers: [
+        ApiService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true,
+        },
+        // { provide: LOCALE_ID, useValue: "id-ID" }
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
