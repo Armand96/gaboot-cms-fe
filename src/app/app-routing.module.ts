@@ -10,7 +10,7 @@ const routes: Routes = [
         path: '',
         component: RootComponent,
         children: [
-            // { path: '', loadChildren: () => import('./main-app/dashboard/dashboard.module').then(m => m.DashboardModule) },
+            { path: '', loadChildren: () => import('./mainapp/dashboard/dashboard.module').then(m => m.DashboardModule) },
 
             /* USER MENU */
             {
@@ -35,7 +35,7 @@ const routes: Routes = [
                     ),
             },
 
-            // { path: '**', component: NotfoundComponent }
+            { path: '**', component: NotfoundComponent }
         ],
     },
     { path: '**', component: NotfoundComponent },
