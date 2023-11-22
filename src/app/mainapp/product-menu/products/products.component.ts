@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductsService } from './service/products.service';
-import { ApiService } from '../services/api/api.service';
-import { ResponseSuccess } from '../services/interfaces/response.dto';
+import { ApiService } from '../../services/api/api.service';
+import { ResponseSuccess } from '../../services/interfaces/response.dto';
 import { Product } from './interface/product';
 import { Observable, Subject } from 'rxjs';
 

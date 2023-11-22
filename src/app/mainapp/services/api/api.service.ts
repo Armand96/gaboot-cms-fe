@@ -69,9 +69,10 @@ export class ApiService {
         });
 
         /* UNATHORIZED */
-        if (error.status == 401) {
-            // localStorage.clear();
-            // this.router.navigateByUrl('/login');
+        // console.log("ERROR SERVICE", error);
+        if (error.status == 401 && error.error.message == "JWT Expired") {
+            localStorage.clear();
+            this.router.navigateByUrl('/login');
         }
     };
 

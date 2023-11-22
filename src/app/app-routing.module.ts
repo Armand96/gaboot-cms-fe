@@ -35,6 +35,22 @@ const routes: Routes = [
                     ),
             },
 
+            /* PRODUCT MENU */
+            {
+                path: 'categories',
+                loadChildren: () =>
+                    import('./mainapp/product-menu/categories/categories.module').then(
+                        (m) => m.CategoriesModule,
+                    ),
+            },
+            {
+                path: 'products',
+                loadChildren: () =>
+                    import('./mainapp/product-menu/products/products.module').then(
+                        (m) => m.ProductsModule,
+                    ),
+            },
+
             { path: '**', component: NotfoundComponent }
         ],
     },

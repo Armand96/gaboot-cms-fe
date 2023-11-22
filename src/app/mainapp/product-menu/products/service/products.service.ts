@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../services/api/api.service';
-import { ResponseSuccess } from '../../services/interfaces/response.dto';
+import { ApiService } from '../../../services/api/api.service';
+import { ResponseSuccess } from '../../../services/interfaces/response.dto';
 import { Product } from '../interface/product';
 
 @Injectable({
@@ -8,8 +8,8 @@ import { Product } from '../interface/product';
 })
 export class ProductsService {
     constructor(private api: ApiService) {}
-    private baseUrl: string = 'product/';
-    private baseUrl2: string = 'product';
+    private baseUrl: string = 'products/';
+    private baseUrl2: string = 'products';
 
     getProducts(params = '') {
         return this.api.getAPI<ResponseSuccess<Product>>(
