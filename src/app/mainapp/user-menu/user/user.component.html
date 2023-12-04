@@ -62,7 +62,7 @@
                         <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!usr.isActive"></i>
                     </td>
                     <td class="avatar flex justify-center items-center">
-                        <div class="w-20 rounded"><img src="{{ api.baseUrl }}user/image/thumb/{{ usr.id }}"
+                        <div class="w-20 rounded"><img src="{{ api.imageUrl + usr.imgThumbPath }}"
                                 loading="lazy" /></div>
                     </td>
                     <td>

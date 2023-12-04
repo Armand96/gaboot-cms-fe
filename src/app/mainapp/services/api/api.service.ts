@@ -18,6 +18,7 @@ export class ApiService {
     ) {}
 
     public baseUrl: string = 'http://localhost:3000/';
+    public imageUrl: string = this.baseUrl+'images?image=';
 
     getAPI<T>(url: string, headers?: HttpHeaders) {
         return this.http.get<T>(this.baseUrl + url, { headers: headers });

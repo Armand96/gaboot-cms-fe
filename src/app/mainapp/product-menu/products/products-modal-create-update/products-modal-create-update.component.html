@@ -1,0 +1,87 @@
+<input type="checkbox" class="modal-toggle" [(ngModel)]="isOpenedModal" />
+<div class="modal ">
+    <form class="modal-box w-11/12 max-w-5xl" [formGroup]="productForm" enctype="multipart/form-data"
+        (ngSubmit)="submitForm(productForm.value)">
+        <h3 class="font-bold text-lg">{{ textCreateUpdate }}</h3>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1">
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Name</span>
+                </label>
+                <input type="text" formControlName="name" class="input input-bordered w-full max-w-xs" required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Description</span>
+                </label>
+                <input type="text" formControlName="description" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Price</span>
+                </label>
+                <input type="text" formControlName="price" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Stock</span>
+                </label>
+                <input type="text" formControlName="stock" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Dimension</span>
+                </label>
+                <input type="text" formControlName="dimension" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Weight</span>
+                </label>
+                <input type="text" formControlName="weight" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Weight Unit</span>
+                </label>
+                <input type="text" formControlName="weightUnit" class="input input-bordered w-full max-w-xs"
+                    required />
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label">
+                    <span class="label-text">Category</span>
+                </label>
+                <select formControlName="categoryId" class="select select-bordered" *ngIf="hasLoadCategories" required>
+                    <option *ngFor="let cat of categories" value="{{ cat.id }}">{{ cat.name }}</option>
+                </select>
+            </div>
+
+            <div class="form-control w-full px-2">
+                <label class="label cursor-pointer mt-9">
+                    <span class="label-text">Active</span>
+                    <input formControlName="isActive" type="checkbox" class="checkbox" />
+                </label>
+            </div>
+
+        </div>
+
+        <div class="modal-action">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="button" class="btn btn-neutral" (click)="cCloseModal()">Tutup</button>
+        </div>
+    </form>
+</div>

@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api/api.service';
 import { ResponseSuccess } from '../../services/interfaces/response.dto';
 import { Product } from './interface/product';
 import { Observable, Subject } from 'rxjs';
+import { constCreateProduct, constUpdateProduct } from './product.const';
 
 @Component({
     selector: 'app-products',
@@ -12,7 +13,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ProductsComponent {
     constructor(
-        private usrSvc: ProductsService,
+        private prodSvc: ProductsService,
         public api: ApiService,
     ) {}
 
@@ -25,6 +26,7 @@ export class ProductsComponent {
     operationMode: string = '';
     isOpenModalCru: boolean = false;
     isOpenModalDel: boolean = false;
+    isOpenModalImage: boolean = false;
 
     /* FILTER PARAMETER */
     totalData = 0;
@@ -36,7 +38,7 @@ export class ProductsComponent {
     };
 
     ngOnInit(): void {
-        this.productObservable = this.usrSvc.getProducts();
+        this.productObservable = this.prodSvc.getProducts();
         this.search();
     }
 
@@ -49,7 +51,7 @@ export class ProductsComponent {
     search() {
         const stringParams = this.api.searchParam(this.dataSearch);
 
-        this.usrSvc.getProducts(stringParams).subscribe({
+        this.prodSvc.getProducts(stringParams).subscribe({
             next: (resp) => {
                 this.products = resp.data;
                 this.totalData = resp.totalData;
@@ -65,20 +67,32 @@ export class ProductsComponent {
         this.search();
     }
 
+    /* IMAGE MODAL */
+    imageModal(id: number) {
+        this.selectedIdProduct = id;
+        this.prodSvc.getProduct(id).subscribe({
+            next: (res) => {
+                this.selectedProduct.next(res.datum);
+                this.isOpenModalImage = true;
+            },
+            error: this.api.errorHandler,
+        });
+    }
+
     /* CREATE MODAL */
     create() {
         this.isOpenModalCru = true;
-        this.operationMode = 'Create Product';
+        this.operationMode = constCreateProduct;
         this.selectedProduct.next({} as Product);
     }
 
     /* EDIT MODAL */
     edit(id: number) {
         this.selectedIdProduct = id;
-        this.usrSvc.getProduct(id).subscribe({
+        this.prodSvc.getProduct(id).subscribe({
             next: (res) => {
                 this.selectedProduct.next(res.datum);
-                this.operationMode = 'Update Product';
+                this.operationMode = constUpdateProduct;
                 this.isOpenModalCru = true;
             },
             error: this.api.errorHandler,
@@ -102,4 +116,12 @@ export class ProductsComponent {
         this.isOpenModalDel = value;
         this.search();
     }
+
+    /* CLOSE MODAL DELETE */
+    pCloseModalImage(value: boolean) {
+        this.isOpenModalImage = value;
+        this.search();
+    }
+
+    
 }

@@ -23,7 +23,7 @@ import { TopnavbarComponent } from './mainapp/layout/topnavbar/topnavbar.compone
         LoadingComponent,
         NotfoundComponent,
         SidebarComponent,
-        TopnavbarComponent,
+        TopnavbarComponent
     ],
     imports: [
         BrowserModule,

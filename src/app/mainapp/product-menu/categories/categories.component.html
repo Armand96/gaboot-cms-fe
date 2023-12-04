@@ -44,7 +44,7 @@
                     <td class="text-center">
                         <div class="flex justify-center items-center">
                             <div class="w-20 rounded text-center">
-                                <img src="{{ api.baseUrl }}categories/image/{{ ctgr.id }}"  alt="">
+                                <img src="{{ api.imageUrl + ctgr.imgThumbPath }}" alt="">
                             </div>
                         </div>
                     </td>
@@ -69,4 +69,4 @@
 <app-categories-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
     [textCreateUpdate]="operationMode" [selectedCategory]="selectedCategory"></app-categories-modal-create-update>
 <!-- <app-menu-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
-    [Category]="selectedCategory"></app-menu-modal-delete> -->
+		[Category]="selectedCategory"></app-menu-modal-delete> -->

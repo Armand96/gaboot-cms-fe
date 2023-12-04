@@ -1,0 +1,29 @@
+<input type="checkbox" class="modal-toggle" [(ngModel)]="isOpenedModal" />
+<div class="modal ">
+    <form class="modal-box w-11/12 max-w-5xl" [formGroup]="imageForm" enctype="multipart/form-data" (ngSubmit)="submitForm(imageForm.value)">
+        <h2 class="md:text-2xl text-2xl mb-3">
+            <b>{{ product.name }}</b>
+        </h2>
+
+        <div class="grid grid-cols-5 grid-flow-col gap-4">
+            <div class="w-full rounded relative" *ngFor="let img of productImages">
+                <img class="w-full h-full" src="{{ api.imageUrl + img.imagePath }}" alt="" loading="lazy">
+                <button type="button" (click)="deleteImage(img.id)"
+                    class="absolute top-0 right-0 bg-transparent text-white btn-glass hover:text-red-600 text-lg mr-2">X</button>
+            </div>
+        </div>
+
+        <div class="form-control w-full px-2">
+            <label class="label">
+                <span class="label-text">Image Products</span>
+            </label>
+            <input type="file" formControlName="img" multiple accept="image/*" required
+                class="file-input file-input-bordered w-full max-w-xs" (change)="fileProgress($event)" />
+        </div>
+
+        <div class="modal-action">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="button" class="btn btn-neutral" (click)="cCloseModal()">Tutup</button>
+        </div>
+    </form>
+</div>

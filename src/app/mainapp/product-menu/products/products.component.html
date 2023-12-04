@@ -62,22 +62,23 @@
                     <td>{{ product.dimension }}</td>
                     <td>{{ product.weight }}</td>
                     <td>{{ product.weightUnit }}</td>
-                    <td>{{ product.categoryId }}</td>
-                    <td>{{ product.createdAt }}</td>
-                    <td>{{ product.updatedAt }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>{{ product.createdAt | date: 'dd MMMM yyyy HH:mm:ss' }}</td>
+                    <td>{{ product.updatedAt | date: 'dd MMMM yyyy HH:mm:ss' }}</td>
                     <td class="text-center">
-                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="true"></i>
-                        <!-- <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!product.isActive"></i> -->
+                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="product.isActive"></i>
+                        <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!product.isActive"></i>
                     </td>
                     <td class="avatar flex justify-center items-center">
-                        <div class="w-20 rounded"><img src="{{ api.baseUrl }}user/image/thumb/{{ product.id }}"
-                                loading="lazy" /></div>
+                        <button class="btn btn-primary" (click)="imageModal(product.id)">
+                            <i class="fas fa-folder-tree"></i>
+                        </button>
                     </td>
                     <td>
                         <div class="flex justify-center items-center">
                             <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
                             <button class="btn btn-primary mx-1" (click)="edit(product.id)">Ubah</button>
-                            <button class="btn btn-warning mx-1" (click)="delete(product)">Hapus</button>
+                            <!-- <button class="btn btn-warning mx-1" (click)="delete(product)">Hapus</button> -->
                         </div>
                     </td>
                 </tr>
@@ -91,7 +92,8 @@
     </div>
 </div>
 
-<!-- <app-user-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
-    [textCreateUpdate]="operationMode" [selectedUser]="selectedUser"></app-user-modal-create-update>
-  <app-user-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
-    [User]="selectedUser"></app-user-modal-delete> -->
+<app-products-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
+    [textCreateUpdate]="operationMode" [selectedProduct]="selectedProduct"></app-products-modal-create-update>
+<app-products-images [isOpenedModal]="isOpenModalImage" (modalEvent)="pCloseModalImage($event)" [selectedProduct]="selectedProduct"></app-products-images>
+  <!-- <app-user-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
+    [Product]="selectedProduct"></app-user-modal-delete> -->

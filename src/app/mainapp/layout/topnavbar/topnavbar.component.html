@@ -18,7 +18,7 @@
             <label tabindex="0" class="">
               <div class="avatar px-1">
                 <div class="w-12 rounded-full">
-                  <img class="btn btn-circle" *ngIf="user.id != 0" src="{{ api.baseUrl }}user/image/{{ user.id }}" />
+                  <img class="btn btn-circle" loading="lazy" *ngIf="user.id != 0" src="{{ api.imageUrl + user.imgThumbPath }}" />
                 </div>
               </div>
             </label>
@@ -35,7 +35,7 @@
         <label tabindex="0" class="">
           <div class="avatar pr-1">
             <div class="w-12 rounded-full">
-              <img *ngIf="user.id != 0" src="{{ api.baseUrl }}user/image/{{ user.id }}" />
+              <img *ngIf="user.id != 0" loading="lazy" src="{{ api.imageUrl + user.imgThumbPath }}" />
             </div>
           </div>
         </label>
