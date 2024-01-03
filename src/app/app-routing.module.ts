@@ -60,6 +60,15 @@ const routes: Routes = [
                     ),
             },
 
+            /* CUSTOMER MENU */
+            {
+                path: 'customer',
+                loadChildren: () =>
+                    import('./mainapp/customer/customer.module').then(
+                        (m) => m.CustomerModule,
+                    ),
+            },
+
             { path: '**', component: NotfoundComponent }
         ],
     },

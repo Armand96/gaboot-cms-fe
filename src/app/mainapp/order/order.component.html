@@ -43,7 +43,7 @@
                     *ngFor="let ord of orders | paginate: { id:'orderPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
                     <th>{{ ord.id }}</th>
                     <td>{{ ord.name }}</td>
-                    <td>{{ ord.customerId }}</td>
+                    <td>{{ ord.customer.firstname + ' ' + ord.customer.lastname }}</td>
                     <td class="text-right">{{ ord.totalPrice | currency: 'Rp ' }}</td>
                     <td class="text-right">{{ ord.discount | currency: 'Rp ' }}</td>
                     <td class="text-right">{{ ord.grandTotal | currency: 'Rp ' }}</td>

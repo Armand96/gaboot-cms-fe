@@ -1,29 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OrderService } from './service/order.service';
+import { CustomerService } from './service/customer.service';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from '../services/api/api.service';
 import { ResponseSuccess } from '../services/interfaces/response.dto';
-import { Order } from './interface/order';
-import { OrderStatus } from './interface/enum-order-status';
+import { Customer } from './interface/customer';
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  selector: 'app-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css']
 })
-export class OrderComponent implements OnInit, OnDestroy {
+export class CustomerComponent implements OnInit, OnDestroy {
     constructor(
-        private ordSvc: OrderService,
+        private cusSvc: CustomerService,
         public api: ApiService,
     ) {}
 
-    ordStatus = OrderStatus;
-    orderObservable = new Observable<ResponseSuccess<Order>>();
-    orders = [] as Order[];
-    hasLoadOrder: boolean = false;
+    customerObservable = new Observable<ResponseSuccess<Customer>>();
+    customers = [] as Customer[];
+    hasLoadCustomer: boolean = false;
 
-    selectedIdOrder: number = 0;
-    selectedOrder = new Subject<Order>();
+    selectedIdCustomer: number = 0;
+    selectedCustomer = new Subject<Customer>();
     operationMode: string = '';
     isOpenModalCru: boolean = false;
     isOpenModalDel: boolean = false;
@@ -33,16 +31,18 @@ export class OrderComponent implements OnInit, OnDestroy {
     dataSearch: any = {
         page: 1,
         limit: 10,
-        name: '',
+        firstname: '',
+        lastname: '',
+        email: '',
     };
 
     ngOnInit(): void {
-        this.orderObservable = this.ordSvc.getOrders();
+        this.customerObservable = this.cusSvc.getCustomers();
         this.search();
     }
 
     ngOnDestroy(): void {
-        this.selectedOrder.unsubscribe();
+        this.selectedCustomer.unsubscribe();
     }
 
     /* ====================================== */
@@ -50,11 +50,11 @@ export class OrderComponent implements OnInit, OnDestroy {
     search() {
         const stringParams = this.api.searchParam(this.dataSearch);
 
-        this.ordSvc.getOrders(stringParams).subscribe({
+        this.cusSvc.getCustomers(stringParams).subscribe({
             next: (resp) => {
-                this.orders = resp.data;
+                this.customers = resp.data;
                 this.totalData = resp.totalData;
-                this.hasLoadOrder = true;
+                this.hasLoadCustomer = true;
                 // this.api.successToastr(resp.message, 'Success');
             },
             error: this.api.errorHandler,
@@ -68,11 +68,11 @@ export class OrderComponent implements OnInit, OnDestroy {
 
     /* EDIT MODAL */
     edit(id: number) {
-        this.selectedIdOrder = id;
-        this.ordSvc.getOrder(id).subscribe({
+        this.selectedIdCustomer = id;
+        this.cusSvc.getCustomer(id).subscribe({
             next: (res) => {
-                this.selectedOrder.next(res.datum);
-                // this.operationMode = constUpdateOrder;
+                this.selectedCustomer.next(res.datum);
+                // this.operationMode = constUpdateCustomer;
                 this.isOpenModalCru = true;
             },
             error: this.api.errorHandler,

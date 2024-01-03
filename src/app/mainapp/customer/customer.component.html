@@ -1,0 +1,71 @@
+<div>
+    <div class="flex">
+        <h3 class="text-2xl mb-2">List Customer</h3>
+    </div>
+
+    <div class="collapse bg-base-200">
+        <input type="checkbox">
+        <div class="collapse-title text-xl font-medium">
+            Search
+        </div>
+        <div class="collapse-content flex mb-5">
+            <div class="form-control px-2">
+                <label class="label">
+                    <span class="label-text">First Name</span>
+                </label>
+                <input type="text" class="input input-bcustered w-full max-w-xs" [(ngModel)]="dataSearch.firstname" />
+            </div>
+            <div class="form-control px-2">
+                <label class="label">
+                    <span class="label-text">Last Name</span>
+                </label>
+                <input type="text" class="input input-bcustered w-full max-w-xs" [(ngModel)]="dataSearch.lastname" />
+            </div>
+            <div class="form-control px-2">
+                <label class="label">
+                    <span class="label-text">Email</span>
+                </label>
+                <input type="text" class="input input-bcustered w-full max-w-xs" [(ngModel)]="dataSearch.email" />
+            </div>
+            <button class="btn btn-primary mt-9" (click)="search()">Search</button>
+        </div>
+
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="table bcuster w-full">
+            <!-- head -->
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="hover"
+                    *ngFor="let cust of customers | paginate: { id:'custPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
+                    <th>{{ cust.id }}</th>
+                    <td>{{ cust.firstname }}</td>
+                    <td>{{ cust.lastname }}</td>
+                    <td>{{ cust.email }}</td>
+                    <td>
+                        <div class="w-20 rounded"><img src="{{ api.imageUrl + cust.imgThumbPath }}"
+                            loading="lazy" /></div>    
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-5">
+        <pagination-controls (pageChange)="onPageChange($event)" id="custPage"></pagination-controls>
+    </div>
+</div>
+
+<!-- <app-products-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
+    [textCreateUpdate]="operationMode" [selectedCustomer]="selectedCustomer"></app-products-modal-create-update> -->
