@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from './service/products.service';
 import { ApiService } from '../../services/api/api.service';
 import { ResponseSuccess } from '../../services/interfaces/response.dto';
@@ -11,7 +11,7 @@ import { constCreateProduct, constUpdateProduct } from './product.const';
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
     constructor(
         private prodSvc: ProductsService,
         public api: ApiService,

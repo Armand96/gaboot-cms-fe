@@ -1,0 +1,72 @@
+<div>
+    <div class="flex">
+        <h3 class="text-2xl mb-2">List Order</h3>
+    </div>
+
+    <div class="collapse bg-base-200">
+        <input type="checkbox">
+        <div class="collapse-title text-xl font-medium">
+            Search
+        </div>
+        <div class="collapse-content flex mb-5">
+            <div class="form-control px-2">
+                <label class="label">
+                    <span class="label-text">Invoice</span>
+                </label>
+                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.name" />
+            </div>
+            <button class="btn btn-primary mt-9" (click)="search()">Search</button>
+        </div>
+
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="table border w-full">
+            <!-- head -->
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Invoice</th>
+                    <th>Customer Name</th>
+                    <th>Total Order</th>
+                    <th>Discount</th>
+                    <th>Grand Total</th>
+                    <th>Total Item</th>
+                    <th>Status</th>
+                    <th>Expired</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="hover"
+                    *ngFor="let ord of orders | paginate: { id:'orderPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
+                    <th>{{ ord.id }}</th>
+                    <td>{{ ord.name }}</td>
+                    <td>{{ ord.customerId }}</td>
+                    <td class="text-right">{{ ord.totalPrice | currency: 'Rp ' }}</td>
+                    <td class="text-right">{{ ord.discount | currency: 'Rp ' }}</td>
+                    <td class="text-right">{{ ord.grandTotal | currency: 'Rp ' }}</td>
+                    <td class="text-right">{{ ord.totalItem }}</td>
+                    <td><b class="{{ ord.status == ordStatus.SUCCESS ? 'text-success' : 'text-info'}}">{{ ord.status }}</b></td>
+                    <td>{{ ord.expired }}</td>
+                    <td>
+                        <div class="flex justify-center items-center">
+                            <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
+                            <button class="btn btn-primary mx-1" (click)="edit(ord.id)">Edit</button>
+                            <!-- <button class="btn btn-warning mx-1" (click)="delete(product)">Hapus</button> -->
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-5">
+        <pagination-controls (pageChange)="onPageChange($event)" id="orderPage"></pagination-controls>
+    </div>
+</div>
+
+<!-- <app-products-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
+    [textCreateUpdate]="operationMode" [selectedOrder]="selectedOrder"></app-products-modal-create-update> -->

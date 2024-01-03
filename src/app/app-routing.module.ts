@@ -51,6 +51,15 @@ const routes: Routes = [
                     ),
             },
 
+            /* ORDER MENU */
+            {
+                path: 'order',
+                loadChildren: () =>
+                    import('./mainapp/order/order.module').then(
+                        (m) => m.OrderModule,
+                    ),
+            },
+
             { path: '**', component: NotfoundComponent }
         ],
     },

@@ -18,8 +18,15 @@
       <div *ngIf="hasLoad">
         <div *ngFor="let menu of user.role.menus; let i = index">
           <div class="dropdown btn-block">
-            <li tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
+            <li *ngIf="menu.menu.frontendUrl == null" tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
               [ngClass]="{'bg-primary text-white': currentMenuId == menu.menu.id }">
+              <div class="flex justify-normal">
+                <i class="{{ menu.menu.menuIcon }}"></i>
+                <a>{{ menu.menu.menuName }}</a>
+              </div>
+            </li>
+            <li *ngIf="menu.menu.frontendUrl != null" tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
+              [ngClass]="{'bg-primary text-white': currentMenuId == menu.menu.id }" routerLink="{{ menu.menu.frontendUrl }}" (click)="afterClickMenu(menu.menu.menuId)">
               <div class="flex justify-normal">
                 <i class="{{ menu.menu.menuIcon }}"></i>
                 <a>{{ menu.menu.menuName }}</a>
