@@ -14,7 +14,7 @@
                 <label class="label">
                     <span class="label-text">User Name</span>
                 </label>
-                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.userName" />
+                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.username" />
             </div>
 
             <!-- <div class="w-full"></div> -->
@@ -23,7 +23,7 @@
                 <label class="label">
                     <span class="label-text">Full Name</span>
                 </label>
-                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.fullName" />
+                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.full_name" />
             </div>
 
             <button class="btn btn-primary mt-9" (click)="search()">Cari</button>
@@ -50,19 +50,19 @@
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let usr of users | paginate: { id:'userPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-                    <th>{{ usr.id }}</th>
-                    <td>{{ usr.userName }}</td>
+                    *ngFor="let usr of users | paginate: { id:'userPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let  i = index">
+                    <th>{{ i+1 }}</th>
+                    <td>{{ usr.username }}</td>
                     <td>{{ usr.email }}</td>
-                    <td>{{ usr.firstName }}</td>
-                    <td>{{ usr.lastName }}</td>
-                    <td>{{ usr.role.roleName }}</td>
+                    <td>{{ usr.firstname }}</td>
+                    <td>{{ usr.lastname }}</td>
+                    <td>{{ usr.role.role_name }}</td>
                     <td class="text-center">
-                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="usr.isActive"></i>
-                        <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!usr.isActive"></i>
+                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="usr.is_active"></i>
+                        <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!usr.is_active"></i>
                     </td>
                     <td class="avatar flex justify-center items-center">
-                        <div class="w-20 rounded"><img src="{{ api.imageUrl + usr.imgThumbPath }}"
+                        <div class="w-20 rounded"><img src="{{ api.imageUrl + usr.thumbnail_path }}"
                                 loading="lazy" /></div>
                     </td>
                     <td>

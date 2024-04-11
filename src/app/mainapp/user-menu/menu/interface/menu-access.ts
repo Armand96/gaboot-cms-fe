@@ -1,8 +1,8 @@
 export class MenuAccess {
-    menuId: number = 0;
-    id: number = 0;
-    createz: boolean = false;
-    readz: boolean = false;
-    updatez: boolean = false;
-    deletez: boolean = false;
+    menu_id: string = "";
+    id: string = "";
+    create_access: boolean = false;
+    read_access: boolean = false;
+    update_access: boolean = false;
+    delete_access: boolean = false;
 }

@@ -46,14 +46,14 @@ export class UserModalCreateUpdateComponent implements OnInit, OnDestroy {
         this.selectedUser.subscribe({
             next: (res) => {
                 this.user = res;
-                this.userForm.controls['userName'].setValue(res.userName);
+                this.userForm.controls['username'].setValue(res.username);
                 this.userForm.controls['email'].setValue(res.email);
-                this.userForm.controls['firstName'].setValue(res.firstName);
-                this.userForm.controls['lastName'].setValue(res.lastName);
-                this.userForm.controls['isActive'].setValue(res.isActive);
-                if (res.roleId != null)
-                    this.userForm.controls['roleId'].setValue(res.roleId);
-                else this.userForm.controls['roleId'].setValue(null);
+                this.userForm.controls['firstname'].setValue(res.firstname);
+                this.userForm.controls['lastname'].setValue(res.lastname);
+                this.userForm.controls['is_active'].setValue(res.is_active);
+                if (res.role_id != null)
+                    this.userForm.controls['role_id'].setValue(res.role_id);
+                else this.userForm.controls['role_id'].setValue(null);
             },
             error: this.api.errorHandler,
         });
@@ -73,14 +73,14 @@ export class UserModalCreateUpdateComponent implements OnInit, OnDestroy {
 
     setForm() {
         this.userForm = this.fb.group({
-            userName: ['', Validators.required],
+            username: ['', Validators.required],
             email: ['', Validators.required],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
             password: [''],
-            roleId: [null, Validators.required],
+            role_id: [null, Validators.required],
             img: [null],
-            isActive: [false],
+            is_active: [false],
         });
     }
 
@@ -96,13 +96,13 @@ export class UserModalCreateUpdateComponent implements OnInit, OnDestroy {
     submitForm(value: UserCreateDTO) {
         const formData = new FormData();
 
-        formData.append('userName', value.userName);
+        formData.append('username', value.username);
         formData.append('email', value.email);
-        formData.append('firstName', value.firstName);
-        formData.append('lastName', value.lastName);
+        formData.append('firstname', value.firstname);
+        formData.append('lastname', value.lastname);
         formData.append('password', value.password);
-        formData.append('isActive', String(value.isActive));
-        formData.append('roleId', value.roleId.toString());
+        formData.append('is_active', String(value.is_active));
+        formData.append('role_id', value.role_id.toString());
         formData.append('img', this.fileData);
 
         if (this.textCreateUpdate == constCreateUser) {

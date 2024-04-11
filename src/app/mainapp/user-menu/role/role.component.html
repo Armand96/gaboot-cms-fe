@@ -14,7 +14,7 @@
                 <label class="label">
                     <span class="label-text">Role Name</span>
                 </label>
-                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.roleName" />
+                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.role_name" />
             </div>
 
             <div class="w-full"></div>
@@ -38,9 +38,9 @@
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let rl of roles| paginate: { id:'rolePage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData };">
-                    <th>{{ rl.id }}</th>
-                    <td>{{ rl.roleName }}</td>
+                    *ngFor="let rl of roles| paginate: { id:'rolePage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                    <th>{{ i+1 }}</th>
+                    <td>{{ rl.role_name }}</td>
                     <!-- <td class="text-center">
             <i class="fa-solid fa-check text-xl text-accent" *ngIf="rl.isActive"></i>
             <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!rl.isActive"></i>

@@ -1,7 +1,7 @@
 export class CreateCategoryDto {
-    id: number = 0;
+    id: string = "";
     name: string = "";
     description: string = "";
-    imgPath: string = "";
-    imgThumbPath: string = "";
+    image_path: string = "";
+    thumbnail_path: string = "";
 }

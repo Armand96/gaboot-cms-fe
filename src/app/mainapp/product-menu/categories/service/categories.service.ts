@@ -20,7 +20,7 @@ export class CategoriesService {
         return this.api.getAPI<ResponseSuccess<Category>>(this.baseUrl2 + params);
     }
 
-    getCategory(id: number) {
+    getCategory(id: string) {
         return this.api.getAPI<ResponseSuccess<Category>>(this.baseUrl + id);
     }
 
@@ -28,14 +28,14 @@ export class CategoriesService {
         return this.api.postAPI<ResponseSuccess<Category>>(this.baseUrl, data);
     }
 
-    updateCategory(id: number, data: FormData) {
+    updateCategory(id: string, data: FormData) {
         return this.api.patchAPI<ResponseSuccess<Category>>(
             this.baseUrl + id,
             data,
         );
     }
 
-    deleteCategory(id: number) {
+    deleteCategory(id: string) {
         return this.api.deleteAPI<ResponseSuccess<Category>>(this.baseUrl + id);
     }
 }

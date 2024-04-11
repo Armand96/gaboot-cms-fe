@@ -40,14 +40,14 @@
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let ord of orders | paginate: { id:'orderPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-                    <th>{{ ord.id }}</th>
+                    *ngFor="let ord of orders | paginate: { id:'orderPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                    <th>{{ i+1 }}</th>
                     <td>{{ ord.name }}</td>
                     <td>{{ ord.customer.firstname + ' ' + ord.customer.lastname }}</td>
-                    <td class="text-right">{{ ord.totalPrice | currency: 'Rp ' }}</td>
+                    <td class="text-right">{{ ord.total_price | currency: 'Rp ' }}</td>
                     <td class="text-right">{{ ord.discount | currency: 'Rp ' }}</td>
-                    <td class="text-right">{{ ord.grandTotal | currency: 'Rp ' }}</td>
-                    <td class="text-right">{{ ord.totalItem }}</td>
+                    <td class="text-right">{{ ord.grand_total | currency: 'Rp ' }}</td>
+                    <td class="text-right">{{ ord.total_item }}</td>
                     <td><b class="{{ ord.status == ordStatus.SUCCESS ? 'text-success' : 'text-info'}}">{{ ord.status }}</b></td>
                     <td>{{ ord.expired }}</td>
                     <td>

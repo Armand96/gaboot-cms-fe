@@ -25,7 +25,7 @@ export class RoleService {
         );
     }
 
-    getRole(id: number) {
+    getRole(id: string) {
         return this.api.getAPI<ResponseSuccess<RoleDetail>>(this.baseUrl + id);
     }
 
@@ -40,21 +40,21 @@ export class RoleService {
         );
     }
 
-    updateRole(id: number, data: CreateRoleDto) {
+    updateRole(id: string, data: CreateRoleDto) {
         return this.api.patchAPI<ResponseSuccess<Role>>(
             this.baseUrl + id,
             data,
         );
     }
 
-    updateRoleDetail(id: number, data: CreateRoleDto) {
+    updateRoleDetail(id: string, data: CreateRoleDto) {
         return this.api.patchAPI<ResponseSuccess<Role>>(
             this.baseUrl + 'update/' + id,
             data,
         );
     }
 
-    deleteRole(id: number) {
+    deleteRole(id: string) {
         return this.api.deleteAPI<ResponseSuccess<Role>>(this.baseUrl + id);
     }
 }

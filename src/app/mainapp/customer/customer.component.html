@@ -47,13 +47,13 @@
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let cust of customers | paginate: { id:'custPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-                    <th>{{ cust.id }}</th>
+                    *ngFor="let cust of customers | paginate: { id:'custPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                    <th>{{ i+1 }}</th>
                     <td>{{ cust.firstname }}</td>
                     <td>{{ cust.lastname }}</td>
                     <td>{{ cust.email }}</td>
                     <td>
-                        <div class="w-20 rounded"><img src="{{ api.imageUrl + cust.imgThumbPath }}"
+                        <div class="w-20 rounded"><img src="{{ api.imageUrl + cust.thumbnail_path }}"
                             loading="lazy" /></div>    
                     </td>
                 </tr>

@@ -21,7 +21,7 @@ export class ProductsService {
         );
     }
 
-    getProduct(id: number) {
+    getProduct(id: string) {
         return this.api.getAPI<ResponseSuccess<Product>>(this.baseUrl + id);
     }
 
@@ -36,27 +36,27 @@ export class ProductsService {
         );
     }
 
-    updateProduct(id: number, data: ProductCreateDto) {
+    updateProduct(id: string, data: ProductCreateDto) {
         return this.api.patchAPI<ResponseSuccess<Product>>(
             this.baseUrl + id,
             data,
         );
     }
 
-    deleteProduct(id: number) {
+    deleteProduct(id: string) {
         return this.api.deleteAPI<ResponseSuccess<Product>>(this.baseUrl + id);
     }
 
     /* ====================================== */
-    getProductImages(productId: number) {
+    getProductImages(productId: string) {
         return this.api.getAPI<ResponseSuccess<ProductImage>>(this.baseUrl + this.prodImg + productId);
     }
 
-    uploadProductImages(id: number, formData: FormData) {
+    uploadProductImages(id: string, formData: FormData) {
         return this.api.postAPI<ResponseSuccess<Product>>(this.baseUrl + this.prodImg + id, formData);
     }
 
-    removeProductImage(idImage: number) {
+    removeProductImage(idImage: string) {
         return this.api.deleteAPI<ResponseSuccess<Product>>(this.baseUrl + this.prodImg + idImage);
     }
 }

@@ -40,23 +40,23 @@ export class MenuModalCreateUpdateComponent implements OnInit, OnDestroy {
         this.selectedMenu.subscribe({
             next: (res) => {
                 this.menu = res;
-                this.menuForm.controls['menuName'].setValue(res.menuName);
-                this.menuForm.controls['menuIcon'].setValue(res.menuIcon);
-                this.menuForm.controls['menuHaveChild'].setValue(
-                    res.menuHaveChild,
+                this.menuForm.controls['menu_name'].setValue(res.menu_name);
+                this.menuForm.controls['menu_icon'].setValue(res.menu_icon);
+                this.menuForm.controls['menu_have_child'].setValue(
+                    res.menu_have_child,
                 );
-                this.menuForm.controls['menuIsActive'].setValue(
-                    res.menuIsActive,
+                this.menuForm.controls['menu_is_active'].setValue(
+                    res.menu_is_active,
                 );
-                this.menuForm.controls['frontendUrl'].setValue(res.frontendUrl);
-                this.menuForm.controls['backendUrl'].setValue(res.backendUrl);
+                this.menuForm.controls['frontend_url'].setValue(res.frontend_url);
+                this.menuForm.controls['backend_url'].setValue(res.backend_url);
 
-                if (res.menuHaveChild) {
-                    this.menuForm.controls['frontendUrl'].disable();
-                    this.menuForm.controls['backendUrl'].disable();
+                if (res.menu_have_child) {
+                    this.menuForm.controls['frontend_url'].disable();
+                    this.menuForm.controls['backend_url'].disable();
                 } else {
-                    this.menuForm.controls['frontendUrl'].enable();
-                    this.menuForm.controls['backendUrl'].enable();
+                    this.menuForm.controls['frontend_url'].enable();
+                    this.menuForm.controls['backend_url'].enable();
                 }
             },
             error: this.api.errorHandler,
@@ -65,12 +65,12 @@ export class MenuModalCreateUpdateComponent implements OnInit, OnDestroy {
 
     setForm() {
         this.menuForm = this.fb.group({
-            menuName: [null, Validators.required],
-            menuIcon: [null, Validators.required],
-            menuHaveChild: [false, Validators.required],
-            menuIsActive: [false, Validators.required],
-            frontendUrl: ['', Validators.required],
-            backendUrl: ['', Validators.required],
+            menu_name: [null, Validators.required],
+            menu_icon: [null, Validators.required],
+            menu_have_child: [false, Validators.required],
+            menu_is_active: [false, Validators.required],
+            frontend_url: ['', Validators.required],
+            backend_url: ['', Validators.required],
         });
     }
 
@@ -79,17 +79,17 @@ export class MenuModalCreateUpdateComponent implements OnInit, OnDestroy {
     }
 
     disableUrl(eventTarget: any) {
-        const boolVal = this.menuForm.controls['menuHaveChild'].value;
+        const boolVal = this.menuForm.controls['menu_have_child'].value;
         console.log(boolVal);
 
         if (!boolVal) {
-            this.menuForm.controls['backendUrl'].setValue(null);
-            this.menuForm.controls['frontendUrl'].setValue(null);
-            this.menuForm.controls['backendUrl'].disable();
-            this.menuForm.controls['frontendUrl'].disable();
+            this.menuForm.controls['backend_url'].setValue(null);
+            this.menuForm.controls['frontend_url'].setValue(null);
+            this.menuForm.controls['backend_url'].disable();
+            this.menuForm.controls['frontend_url'].disable();
         } else {
-            this.menuForm.controls['backendUrl'].enable();
-            this.menuForm.controls['frontendUrl'].enable();
+            this.menuForm.controls['backend_url'].enable();
+            this.menuForm.controls['frontend_url'].enable();
         }
         // console.log(eventTarget.value);
         // console.log();

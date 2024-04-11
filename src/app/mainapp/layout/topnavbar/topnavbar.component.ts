@@ -46,13 +46,13 @@ export class TopnavbarComponent implements OnInit, OnDestroy {
 
     setForm() {
         this.userForm = this.fb.group({
-            userName: [''],
-            firstName: [''],
-            lastName: [''],
+            username: [''],
+            firstname: [''],
+            lastname: [''],
             password: [''],
-            roleId: [null],
+            role_id: [null],
             img: [null],
-            isActive: [false],
+            is_active: [false],
         });
     }
 
@@ -62,13 +62,13 @@ export class TopnavbarComponent implements OnInit, OnDestroy {
 
     openModal() {
         this.isOpenedModal = true;
-        this.userForm.controls['userName'].setValue(this.user.userName);
-        this.userForm.controls['firstName'].setValue(this.user.firstName);
-        this.userForm.controls['lastName'].setValue(this.user.lastName);
-        this.userForm.controls['isActive'].setValue(this.user.isActive);
-        if (this.user.roleId != null)
-            this.userForm.controls['roleId'].setValue(this.user.roleId);
-        else this.userForm.controls['roleId'].setValue(null);
+        this.userForm.controls['username'].setValue(this.user.username);
+        this.userForm.controls['firstname'].setValue(this.user.firstname);
+        this.userForm.controls['lastname'].setValue(this.user.lastname);
+        this.userForm.controls['is_active'].setValue(this.user.is_active);
+        if (this.user.role_id != null)
+            this.userForm.controls['role_id'].setValue(this.user.role_id);
+        else this.userForm.controls['role_id'].setValue(null);
     }
 
     logout() {
@@ -82,12 +82,12 @@ export class TopnavbarComponent implements OnInit, OnDestroy {
     submitForm(value: UserCreateDTO) {
         const formData = new FormData();
 
-        formData.append('userName', value.userName);
-        formData.append('firstName', value.firstName);
-        formData.append('lastName', value.lastName);
+        formData.append('username', value.username);
+        formData.append('firstname', value.firstname);
+        formData.append('lastname', value.lastname);
         formData.append('password', value.password);
-        formData.append('isActive', String(value.isActive));
-        formData.append('roleId', value.roleId.toString());
+        formData.append('is_active', String(value.is_active));
+        formData.append('role_id', value.role_id.toString());
         formData.append('img', this.fileData);
 
         /* UPDATE USER */

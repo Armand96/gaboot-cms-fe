@@ -20,7 +20,7 @@ export class MenuService {
         return this.api.getAPI<ResponseSuccess<Menu>>(this.baseUrl2 + params);
     }
 
-    getMenu(id: number) {
+    getMenu(id: string) {
         return this.api.getAPI<ResponseSuccess<Menu>>(this.baseUrl + id);
     }
 
@@ -28,14 +28,14 @@ export class MenuService {
         return this.api.postAPI<ResponseSuccess<Menu>>(this.baseUrl, data);
     }
 
-    updateMenu(id: number, data: CreateMenuDto) {
+    updateMenu(id: string, data: CreateMenuDto) {
         return this.api.patchAPI<ResponseSuccess<Menu>>(
             this.baseUrl + id,
             data,
         );
     }
 
-    deleteMenu(id: number) {
+    deleteMenu(id: string) {
         return this.api.deleteAPI<ResponseSuccess<Menu>>(this.baseUrl + id);
     }
 }

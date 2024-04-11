@@ -1,9 +1,9 @@
 import { Product } from "../../product-menu/products/interface/product";
 
 export class OrderDetail {
-    id: number = 0;
-    orderId: number = 0;
-    productId: number = 0;
+    id: string = "";
+    order_id: string = "";
+    product_id: string = "";
     price: number = 0;
     discount: number = 0;
     quantity: number = 0;

@@ -14,7 +14,7 @@
                 <label class="label">
                     <span class="label-text">Menu Name</span>
                 </label>
-                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.menuName" />
+                <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.menu_name" />
             </div>
 
             <div class="w-full"></div>
@@ -40,21 +40,21 @@
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let mn of menus | paginate: { id:'menusPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-                    <th>{{ mn.id }}</th>
-                    <td>{{ mn.menuName }}</td>
+                    *ngFor="let mn of menus | paginate: { id:'menusPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                    <th>{{ i+1 }}</th>
+                    <td>{{ mn.menu_name }}</td>
                     <td class="text-center">
-                        <i class="{{ mn.menuIcon }}"></i>
+                        <i class="{{ mn.menu_icon }}"></i>
                     </td>
                     <td class="text-center">
-                        <button class="btn btn-primary" *ngIf="mn.menuHaveChild" (click)="openSub(mn.id)">
+                        <button class="btn btn-primary" *ngIf="mn.menu_have_child" (click)="openSub(mn.id)">
                             <i class="fas fa-folder-tree"></i>
                         </button>
-                        <i class="fas fa-folder-closed" *ngIf="!mn.menuHaveChild"></i>
+                        <i class="fas fa-folder-closed" *ngIf="!mn.menu_have_child"></i>
                     </td>
                     <td class="text-center">
-                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="mn.menuIsActive"></i>
-                        <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!mn.menuIsActive"></i>
+                        <i class="fa-solid fa-check text-xl text-accent" *ngIf="mn.menu_is_active"></i>
+                        <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!mn.menu_is_active"></i>
                     </td>
                     <td>
                         <div class="flex justify-center items-center">

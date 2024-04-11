@@ -86,7 +86,7 @@ export class ProductsImagesComponent implements OnInit, OnDestroy {
         })
     }
 
-    deleteImage(id: number) {
+    deleteImage(id: string) {
         this.prodSvc.removeProductImage(id).subscribe({
             next:(res) => {
                 this.api.successToastr(res.message, 'Success Delete Image')

@@ -1,10 +1,10 @@
 import { Product } from "../../products/interface/product";
 
 export class Category {
-    id: number = 0;
+    id: string = "";
     name: string = "";
     description: string = "";
-    imgPath: string = "";
-    imgThumbPath: string = "";
+    image_path: string = "";
+    thumbnail_path: string = "";
     products: Product[] = [];
 }

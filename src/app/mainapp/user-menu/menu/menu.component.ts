@@ -24,14 +24,14 @@ export class MenuComponent implements OnInit, OnDestroy {
     isOpenModalSubmenu: boolean = false;
 
     selectedMenu = new Subject<Menu>();
-    selectedMenuIdForSub = new Subject<number>();
+    selectedMenuIdForSub = new Subject<string>();
 
     /* FILTER PARAMETER */
     totalData = 0;
     dataSearch: any = {
         page: 1,
         limit: 10,
-        menuName: '',
+        menu_name: '',
     };
 
     ngOnInit(): void {
@@ -68,7 +68,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.selectedMenu.next({} as Menu);
     }
 
-    edit(menuId: number) {
+    edit(menuId: string) {
         this.menuSvc.getMenu(menuId).subscribe({
             next: (res) => {
                 this.selectedMenu.next(res.datum);
@@ -84,7 +84,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.selectedMenu.next(menu);
     }
 
-    openSub(menuId: number) {
+    openSub(menuId: string) {
         this.selectedMenuIdForSub.next(menuId);
         this.isOpenModalSubmenu = true;
     }

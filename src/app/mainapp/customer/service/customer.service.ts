@@ -16,7 +16,7 @@ export class CustomerService {
         return this.api.getAPI<ResponseSuccess<Customer>>(this.baseUrl2 + params);
     }
 
-    getCustomer(id: number) {
+    getCustomer(id: string) {
         return this.api.getAPI<ResponseSuccess<Customer>>(this.baseUrl + id);
     }
 
@@ -24,14 +24,14 @@ export class CustomerService {
         return this.api.postAPI<ResponseSuccess<Customer>>(this.baseUrl, formData);
     }
 
-    updateCustomer(id: number, formData: FormData) {
+    updateCustomer(id: string, formData: FormData) {
         return this.api.patchAPI<ResponseSuccess<Customer>>(
             this.baseUrl + id,
             formData,
         );
     }
 
-    deleteCustomer(id: number) {
+    deleteCustomer(id: string) {
         return this.api.deleteAPI<ResponseSuccess<Customer>>(this.baseUrl + id);
     }
 }

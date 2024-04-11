@@ -7,7 +7,7 @@
 
         <div class="grid grid-cols-5 grid-flow-col gap-4">
             <div class="w-full rounded relative" *ngFor="let img of productImages">
-                <img class="w-full h-full" src="{{ api.imageUrl + img.imagePath }}" alt="" loading="lazy">
+                <img class="w-full h-full" src="{{ api.imageUrl + img.image_path }}" alt="" loading="lazy">
                 <button type="button" (click)="deleteImage(img.id)"
                     class="absolute top-0 right-0 bg-transparent text-white btn-glass hover:text-red-600 text-lg mr-2">X</button>
             </div>

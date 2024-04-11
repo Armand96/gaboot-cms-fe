@@ -18,28 +18,28 @@
       <div *ngIf="hasLoad">
         <div *ngFor="let menu of user.role.menus; let i = index">
           <div class="dropdown btn-block">
-            <li *ngIf="menu.menu.frontendUrl == null" tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
+            <li *ngIf="menu.menu.frontend_url == null" tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
               [ngClass]="{'bg-primary text-white': currentMenuId == menu.menu.id }">
               <div class="flex justify-normal">
-                <i class="{{ menu.menu.menuIcon }}"></i>
-                <a>{{ menu.menu.menuName }}</a>
+                <i class="{{ menu.menu.menu_icon }}"></i>
+                <a>{{ menu.menu.menu_name }}</a>
               </div>
             </li>
-            <li *ngIf="menu.menu.frontendUrl != null" tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
-              [ngClass]="{'bg-primary text-white': currentMenuId == menu.menu.id }" routerLink="{{ menu.menu.frontendUrl }}" (click)="afterClickMenu(menu.menu.id)">
+            <li *ngIf="menu.menu.frontend_url != null" tabIndex="{{i}}" class="mb-1 rounded hover:bg-primary hover:text-white"
+              [ngClass]="{'bg-primary text-white': currentMenuId == menu.menu.id }" routerLink="{{ menu.menu.frontend_url }}" (click)="afterClickMenu(menu.menu.id)">
               <div class="flex justify-normal">
-                <i class="{{ menu.menu.menuIcon }}"></i>
-                <a>{{ menu.menu.menuName }}</a>
+                <i class="{{ menu.menu.menu_icon }}"></i>
+                <a>{{ menu.menu.menu_name }}</a>
               </div>
             </li>
             <ul tabindex="{{i}}" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-              *ngIf="menu.menu.menuHaveChild">
+              *ngIf="menu.menu.menu_have_child">
               <div *ngFor="let subm of menu.submenus">
-                <li class="rounded mb-1" [ngClass]="{'bg-primary text-white': router.url == subm.submenu.frontendUrl }"
-                  routerLink="{{ subm.submenu.frontendUrl }}" (click)="afterClickMenu(subm.submenu.menuId)">
+                <li class="rounded mb-1" [ngClass]="{'bg-primary text-white': router.url == subm.submenu.frontend_url }"
+                  routerLink="{{ subm.submenu.frontend_url }}" (click)="afterClickMenu(subm.submenu.menu_id)">
                   <div class="flex justify-normal">
-                    <i class="{{ subm.submenu.submenuIcon }}"></i>
-                    <a>{{ subm.submenu.submenuName }}</a>
+                    <i class="{{ subm.submenu.submenu_icon }}"></i>
+                    <a>{{ subm.submenu.submenu_name }}</a>
                   </div>
                 </li>
               </div>

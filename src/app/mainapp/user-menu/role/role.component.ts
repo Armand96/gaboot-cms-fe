@@ -22,7 +22,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     roles = [] as RoleOnly[];
     hasLoadRole: boolean = false;
 
-    selectedIdUser: number = 0;
+    selectedIdUser: string= "";
     selectedRole = new Subject<RoleDetail>();
     deletedRole = new Subject<RoleOnly>();
     operationMode: string = '';
@@ -34,7 +34,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     dataSearch: any = {
         page: 1,
         limit: 10,
-        roleName: '',
+        role_name: '',
     };
 
     ngOnInit(): void {
@@ -72,7 +72,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     }
 
     /* EDIT MODAL */
-    edit(id: number) {
+    edit(id: string) {
         this.selectedIdUser = id;
         this.roleSvc.getRole(id).subscribe({
             next: (res) => {

@@ -57,7 +57,7 @@
                 <label class="label">
                     <span class="label-text">Weight Unit</span>
                 </label>
-                <input type="text" formControlName="weightUnit" class="input input-bordered w-full max-w-xs"
+                <input type="text" formControlName="weight_unit" class="input input-bordered w-full max-w-xs"
                     required />
             </div>
 
@@ -65,7 +65,7 @@
                 <label class="label">
                     <span class="label-text">Category</span>
                 </label>
-                <select formControlName="categoryId" class="select select-bordered" *ngIf="hasLoadCategories" required>
+                <select formControlName="category_id" class="select select-bordered" *ngIf="hasLoadCategories" required>
                     <option *ngFor="let cat of categories" value="{{ cat.id }}">{{ cat.name }}</option>
                 </select>
             </div>
@@ -73,7 +73,7 @@
             <div class="form-control w-full px-2">
                 <label class="label cursor-pointer mt-9">
                     <span class="label-text">Active</span>
-                    <input formControlName="isActive" type="checkbox" class="checkbox" />
+                    <input formControlName="is_active" type="checkbox" class="checkbox" />
                 </label>
             </div>
 

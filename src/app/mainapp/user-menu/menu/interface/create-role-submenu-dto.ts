@@ -1,9 +1,9 @@
 export interface CreateRoleSubmenuDto {
-    submenuId: number;
-    menuId: number;
-    isChecked: boolean;
-    createz: boolean;
-    readz: boolean;
-    updatez: boolean;
-    deletez: boolean;
+    submenu_id: string;
+    menu_id: string;
+    is_checked: boolean;
+    create_access: boolean;
+    read_access: boolean;
+    update_access: boolean;
+    delete_access: boolean;
 }

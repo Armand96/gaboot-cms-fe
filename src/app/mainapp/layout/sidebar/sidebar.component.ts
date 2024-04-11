@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     @Input() user = {} as User;
     hasLoad: boolean = false;
     sameUrl: boolean = false;
-    currentMenuId: number = 0;
+    currentMenuId: string = "";
     isDrawerOpen: boolean = false;
 
     constructor(public router: Router) {}
@@ -28,9 +28,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
             for (let index = 0; index < accesses.length; index++) {
                 const element = accesses[index];
 
-                if (this.router.url == element.frontendUrl) {
+                if (this.router.url == element.frontend_url) {
                     this.sameUrl = true;
-                    this.currentMenuId = element.menuId;
+                    this.currentMenuId = element.menu_id;
                     // console.log(this.currentMenuId, element.menuId)
                     break;
                 }
@@ -47,13 +47,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.subjs.unsubscribe();
     }
 
-    afterClickMenu(menuId: number) {
+    afterClickMenu(menuId: string) {
         this.isDrawerOpen = false;
         this.currentMenuId = menuId;
     }
 
     home() {
         this.isDrawerOpen = false;
-        this.currentMenuId = 0;
+        this.currentMenuId = "";
     }
 }

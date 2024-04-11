@@ -1,8 +1,8 @@
 export interface CreateSubmenuDto {
-    menuId: number;
-    submenuName: string;
-    submenuIcon: string;
-    frontendUrl: string;
-    backendUrl: string;
-    submenuIsActive: boolean;
+    menu_id: string;
+    submenu_name: string;
+    submenu_icon: string;
+    frontend_url: string;
+    backend_url: string;
+    submenu_is_active: boolean;
 }

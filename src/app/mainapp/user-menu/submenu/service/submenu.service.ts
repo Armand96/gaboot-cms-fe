@@ -20,11 +20,11 @@ export class SubmenuService {
         return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl);
     }
 
-    getSubmenu(id: number) {
+    getSubmenu(id: string) {
         return this.api.getAPI<ResponseSuccess<Submenu>>(this.baseUrl + id);
     }
 
-    getSubmenusByMenuId(menuId: number, params = '') {
+    getSubmenusByMenuId(menuId: string, params = '') {
         return this.api.getAPI<ResponseSuccess<Submenu>>(
             this.baseUrl + 'menu/' + menuId + params,
         );
@@ -34,14 +34,14 @@ export class SubmenuService {
         return this.api.postAPI<ResponseSuccess<Submenu>>(this.baseUrl, data);
     }
 
-    updateSubmenu(id: number, data: CreateSubmenuDto) {
+    updateSubmenu(id: string, data: CreateSubmenuDto) {
         return this.api.patchAPI<ResponseSuccess<Submenu>>(
             this.baseUrl + id,
             data,
         );
     }
 
-    deleteSubmenu(id: number) {
+    deleteSubmenu(id: string) {
         return this.api.deleteAPI<ResponseSuccess<Submenu>>(this.baseUrl + id);
     }
 }

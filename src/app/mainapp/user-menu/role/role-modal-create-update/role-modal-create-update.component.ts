@@ -55,7 +55,7 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                         this.addMenu(element.id);
                         // console.log(this.roleForm);
 
-                        if (element.menuHaveChild) {
+                        if (element.menu_have_child) {
                             for (
                                 let idxJ = 0;
                                 idxJ < element.submenus.length;
@@ -63,7 +63,7 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                             ) {
                                 const elm = element.submenus[idxJ];
                                 // console.log('index submenu', index);
-                                this.addSubmenus(index, elm.id, elm.menuId);
+                                this.addSubmenus(index, elm.id, elm.menu_id);
                             }
                         }
                     }
@@ -81,14 +81,14 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                 next: (res) => {
                     this.role = res;
 
-                    this.roleForm.controls['roleName'].setValue(res.roleName);
+                    this.roleForm.controls['role_name'].setValue(res.role_name);
 
                     if (Array.isArray(res.menus)) {
                         res.menus.forEach((mn) => {
                             const index = this.roleForm.controls[
-                                'roleMenus'
+                                'role_menus'
                             ].value.findIndex(
-                                (item: any) => item.menuId == mn.menuId,
+                                (item: any) => item.menuId == mn.menu_id,
                             );
                             this.menuz()
                                 .at(index)
@@ -99,10 +99,10 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                             if (mn.menu != null) {
                                 this.menuz().at(index).patchValue({
                                     isChecked: true,
-                                    createz: mn.menu.access.createz,
-                                    readz: mn.menu.access.readz,
-                                    updatez: mn.menu.access.updatez,
-                                    deletez: mn.menu.access.deletez,
+                                    create_access: mn.menu.access.create_access,
+                                    read_access: mn.menu.access.read_access,
+                                    update_access: mn.menu.access.update_access,
+                                    delete_access: mn.menu.access.delete_access,
                                 });
                             }
 
@@ -110,19 +110,19 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                                 const sm = mn.submenus[idx];
                                 const subIndex = this.menuz()
                                     .at(index)
-                                    .value.roleSubmenus.findIndex(
+                                    .value.role_submenus.findIndex(
                                         (subItem: any) =>
-                                            subItem.submenuId == sm.submenuId,
+                                            subItem.submenu_id == sm.submenu_id,
                                     );
                                 // console.log(mn, sm)
                                 this.submenusForm(index)
                                     .at(subIndex)
                                     .patchValue({
                                         isChecked: true,
-                                        createz: sm.submenu.access.createz,
-                                        readz: sm.submenu.access.readz,
-                                        updatez: sm.submenu.access.updatez,
-                                        deletez: sm.submenu.access.deletez,
+                                        create_access: sm.submenu.access.create_access,
+                                        read_access: sm.submenu.access.read_access,
+                                        update_access: sm.submenu.access.update_access,
+                                        delete_access: sm.submenu.access.delete_access,
                                     });
                                 // console.log(this.submenusForm(index).at(subIndex))
                             }
@@ -142,48 +142,48 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
 
     setForm() {
         this.roleForm = this.fb.group({
-            roleName: ['', Validators.required],
-            roleMenus: this.fb.array([]),
+            role_name: ['', Validators.required],
+            role_menus: this.fb.array([]),
         });
     }
 
     menuz(): FormArray {
-        return this.roleForm.get('roleMenus') as FormArray;
+        return this.roleForm.get('role_menus') as FormArray;
     }
 
-    newMenu(menuId: number): FormGroup {
+    newMenu(menuId: string): FormGroup {
         return this.fb.group({
-            isChecked: false,
-            menuId: menuId,
-            createz: false,
-            readz: false,
-            updatez: false,
-            deletez: false,
-            roleSubmenus: this.fb.array([]),
+            is_checked: false,
+            menu_id: menuId,
+            create_access: false,
+            read_access: false,
+            update_access: false,
+            delete_access: false,
+            role_submenus: this.fb.array([]),
         });
     }
 
-    addMenu(menuId: number) {
+    addMenu(menuId: string) {
         this.menuz().push(this.newMenu(menuId));
     }
 
     submenusForm(menuIndex: number): FormArray {
-        return this.menuz().at(menuIndex).get('roleSubmenus') as FormArray;
+        return this.menuz().at(menuIndex).get('role_submenus') as FormArray;
     }
 
-    newSubmenu(submenuId: number, menuId: number): FormGroup {
+    newSubmenu(submenuId: string, menuId: string): FormGroup {
         return this.fb.group({
-            isChecked: false,
-            submenuId: submenuId,
-            menuId: menuId,
-            createz: '',
-            readz: '',
-            updatez: '',
-            deletez: '',
+            is_checked: false,
+            submenu_id: submenuId,
+            menu_id: menuId,
+            create_access: '',
+            read_access: '',
+            update_access: '',
+            delete_access: '',
         });
     }
 
-    addSubmenus(menuIndex: number, submenuId: number, menuId: number) {
+    addSubmenus(menuIndex: number, submenuId: string, menuId: string) {
         this.submenusForm(menuIndex).push(this.newSubmenu(submenuId, menuId));
     }
 

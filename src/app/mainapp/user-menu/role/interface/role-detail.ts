@@ -1,7 +1,7 @@
 import { RoleMenu } from './role-menu';
 
 export class RoleDetail {
-    id: number = 0;
-    roleName: string = '';
+    id: string = "";
+    role_name: string = '';
     menus: RoleMenu[] = [];
 }

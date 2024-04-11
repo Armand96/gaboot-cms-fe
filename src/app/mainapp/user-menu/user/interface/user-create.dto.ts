@@ -1,11 +1,11 @@
 export class UserCreateDTO {
-    userName: string = '';
+    username: string = '';
     email: string = '';
-    firstName: string = '';
-    lastName: string = '';
+    firstname: string = '';
+    lastname: string = '';
     password: string = '';
-    isActive: boolean = false;
-    imgPath: string = '';
-    imgThumbPath: string = '';
-    roleId: number = 0;
+    is_active: boolean = false;
+    image_path: string = '';
+    thumbnail_path: string = '';
+    role_id: string = "";
 }

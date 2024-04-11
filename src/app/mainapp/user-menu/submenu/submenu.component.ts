@@ -28,10 +28,10 @@ export class SubmenuComponent implements OnInit, OnDestroy {
     isOpenModalCru: boolean = false;
     isOpenModalDel: boolean = false;
     selectedSubmenu = new Subject<Submenu>();
-    menuId = 0;
+    menuId = "";
 
     @Input() isOpenedModal: boolean = false;
-    @Input() selectedMenuId = new Subject<number>();
+    @Input() selectedMenuId = new Subject<string>();
     @Output() modalEvent = new EventEmitter<boolean>();
 
     /* FILTER PARAMETER */
@@ -39,8 +39,8 @@ export class SubmenuComponent implements OnInit, OnDestroy {
     dataSearch: any = {
         page: 1,
         limit: 10,
-        userName: '',
-        fullName: '',
+        username: '',
+        full_name: '',
     };
 
     ngOnInit(): void {
@@ -60,7 +60,7 @@ export class SubmenuComponent implements OnInit, OnDestroy {
         this.loadSubmData(this.menuId);
     }
 
-    loadSubmData = (menuId: number) => {
+    loadSubmData = (menuId: string) => {
         this.menuId = menuId;
 
         const paramsString = this.api.searchParam(this.dataSearch);
@@ -76,10 +76,10 @@ export class SubmenuComponent implements OnInit, OnDestroy {
     create() {
         this.isOpenModalCru = true;
         this.operationMode = constCreateSubmenu;
-        this.selectedSubmenu.next({ menuId: this.menuId } as Submenu);
+        this.selectedSubmenu.next({ menu_id: this.menuId } as Submenu);
     }
 
-    edit(id: number) {
+    edit(id: string) {
         this.submSvc.getSubmenu(id).subscribe({
             next: (res) => {
                 this.selectedSubmenu.next(res.datum);

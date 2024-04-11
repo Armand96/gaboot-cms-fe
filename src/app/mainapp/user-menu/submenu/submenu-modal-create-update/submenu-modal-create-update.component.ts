@@ -40,14 +40,14 @@ export class SubmenuModalCreateUpdateComponent implements OnInit, OnDestroy {
         this.selectedSubmenu.subscribe({
             next: (res) => {
                 this.subm = res;
-                this.submForm.controls['submenuName'].setValue(res.submenuName);
-                this.submForm.controls['submenuIcon'].setValue(res.submenuIcon);
-                this.submForm.controls['submenuIsActive'].setValue(
-                    res.submenuIsActive,
+                this.submForm.controls['submenu_name'].setValue(res.submenu_name);
+                this.submForm.controls['submenu_icon'].setValue(res.submenu_icon);
+                this.submForm.controls['submenu_is_active'].setValue(
+                    res.submenu_is_active,
                 );
-                this.submForm.controls['frontendUrl'].setValue(res.frontendUrl);
-                this.submForm.controls['backendUrl'].setValue(res.backendUrl);
-                this.submForm.controls['menuId'].setValue(res.menuId);
+                this.submForm.controls['frontend_url'].setValue(res.frontend_url);
+                this.submForm.controls['backend_url'].setValue(res.backend_url);
+                this.submForm.controls['menu_id'].setValue(res.menu_id);
             },
             error: this.api.errorHandler,
         });
@@ -55,12 +55,12 @@ export class SubmenuModalCreateUpdateComponent implements OnInit, OnDestroy {
 
     setForm() {
         this.submForm = this.fb.group({
-            submenuName: [null, Validators.required],
-            submenuIcon: [null, Validators.required],
-            submenuIsActive: [false, Validators.required],
-            frontendUrl: ['', Validators.required],
-            backendUrl: ['', Validators.required],
-            menuId: ['', Validators.required],
+            submenu_name: [null, Validators.required],
+            submenu_icon: [null, Validators.required],
+            submenu_is_active: [false, Validators.required],
+            frontend_url: ['', Validators.required],
+            backend_url: ['', Validators.required],
+            menu_id: ['', Validators.required],
         });
     }
 

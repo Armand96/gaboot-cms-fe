@@ -66,7 +66,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         this.selectedCategory.next({} as Category);
     }
 
-    edit(categoryId: number) {
+    edit(categoryId: string) {
         this.categorySvc.getCategory(categoryId).subscribe({
             next: (res) => {
                 this.selectedCategory.next(res.datum);

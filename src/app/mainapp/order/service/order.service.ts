@@ -19,11 +19,11 @@ export class OrderService {
         );
     }
 
-    getOrder(id: number) {
+    getOrder(id: string) {
         return this.api.getAPI<ResponseSuccess<Order>>(this.baseUrl + id);
     }
 
-    // updateOrder(id: number, data: OrderCreateDto) {
+    // updateOrder(id: string, data: OrderCreateDto) {
     //     return this.api.patchAPI<ResponseSuccess<Order>>(
     //         this.baseUrl + id,
     //         data,
@@ -31,7 +31,7 @@ export class OrderService {
     // }
 
     /* ====================================== */
-    getOrderDetails(orderId: number) {
+    getOrderDetails(orderId: string) {
         return this.api.getAPI<ResponseSuccess<OrderDetail>>(this.baseUrl + orderId);
     }
 }

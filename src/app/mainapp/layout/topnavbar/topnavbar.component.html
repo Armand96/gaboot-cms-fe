@@ -11,14 +11,14 @@
         <ul class="menu menu-horizontal">
           <!-- Navbar menu content here -->
           <li>
-            <p>{{ user.userName }}</p>
+            <p>{{ user.username }}</p>
           </li>
 
           <div class="dropdown dropdown-bottom dropdown-end">
             <label tabindex="0" class="">
               <div class="avatar px-1">
                 <div class="w-12 rounded-full">
-                  <img class="btn btn-circle" loading="lazy" *ngIf="user.id != 0" src="{{ api.imageUrl + user.imgThumbPath }}" />
+                  <img class="btn btn-circle" loading="lazy" *ngIf="user.id != ''" src="{{ api.imageUrl + user.thumbnail_path }}" />
                 </div>
               </div>
             </label>
@@ -35,7 +35,7 @@
         <label tabindex="0" class="">
           <div class="avatar pr-1">
             <div class="w-12 rounded-full">
-              <img *ngIf="user.id != 0" loading="lazy" src="{{ api.imageUrl + user.imgThumbPath }}" />
+              <img *ngIf="user.id != ''" loading="lazy" src="{{ api.imageUrl + user.thumbnail_path }}" />
             </div>
           </div>
         </label>
@@ -76,21 +76,21 @@
         <label class="label">
           <span class="label-text">User Name</span>
         </label>
-        <input type="text" formControlName="userName" class="input input-bordered w-full max-w-xs" required/>
+        <input type="text" formControlName="username" class="input input-bordered w-full max-w-xs" required/>
       </div>
 
       <div class="form-control w-full px-2">
         <label class="label">
           <span class="label-text">First Name</span>
         </label>
-        <input type="text" formControlName="firstName" class="input input-bordered w-full max-w-xs" required/>
+        <input type="text" formControlName="firstname" class="input input-bordered w-full max-w-xs" required/>
       </div>
 
       <div class="form-control w-full px-2">
         <label class="label">
           <span class="label-text">Last Name</span>
         </label>
-        <input type="text" formControlName="lastName" class="input input-bordered w-full max-w-xs" required/>
+        <input type="text" formControlName="lastname" class="input input-bordered w-full max-w-xs" required/>
       </div>
 
       <div class="form-control w-full px-2">
@@ -100,7 +100,7 @@
         <input type="password" formControlName="password" class="input input-bordered w-full max-w-xs" [required]="textCreateUpdate == 'Buat User'"/>
       </div>
 
-      <input type="hidden" formControlName="roleId" [value]="user.roleId">
+      <input type="hidden" formControlName="role_id" [value]="user.role_id">
 
       <div class="form-control w-full px-2">
         <label class="label">
@@ -112,7 +112,7 @@
       <div class="form-control w-full px-2">
         <label class="label cursor-pointer mt-9">
           <span class="label-text">Active</span>
-          <input formControlName="isActive" type="checkbox" class="checkbox" />
+          <input formControlName="is_active" type="checkbox" class="checkbox" />
         </label>
       </div>
 

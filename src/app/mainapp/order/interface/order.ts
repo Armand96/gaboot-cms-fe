@@ -3,15 +3,15 @@ import { OrderStatus } from "./enum-order-status";
 import { OrderDetail } from "./order-detail";
 
 export class Order {
-    id: number = 0;
+    id: string = "";
     name: string = "";
-    customerId: number = 0;
+    customer_id: string = "";
     customer: Customer = new Customer();
-    totalPrice: number = 0;
+    total_price: number = 0;
     discount: number = 0;
-    grandTotal: number = 0;
-    totalItem: number = 0;
+    grand_total: number = 0;
+    total_item: number = 0;
     status: OrderStatus = OrderStatus.OPEN;
     expired: string = "";
-    orderDetail: OrderDetail[] = [];
+    order_detail: OrderDetail[] = [];
 }

@@ -42,9 +42,9 @@ export class ProductsModalCreateUpdateComponent implements OnInit, OnDestroy {
                 this.productForm.controls['stock'].setValue(res.stock);
                 this.productForm.controls['dimension'].setValue(res.dimension);
                 this.productForm.controls['weight'].setValue(res.weight);
-                this.productForm.controls['weightUnit'].setValue(res.weightUnit);
-                this.productForm.controls['categoryId'].setValue(res.categoryId);
-                this.productForm.controls['isActive'].setValue(res.isActive);
+                this.productForm.controls['weight_unit'].setValue(res.weight_unit);
+                this.productForm.controls['category_id'].setValue(res.category_id);
+                this.productForm.controls['is_active'].setValue(res.is_active);
             },
             error: this.api.errorHandler,
         });
@@ -70,9 +70,9 @@ export class ProductsModalCreateUpdateComponent implements OnInit, OnDestroy {
             stock: ['', Validators.required],
             dimension: ['', Validators.required],
             weight: ['', Validators.required],
-            weightUnit: ['', Validators.required],
-            categoryId: [null, Validators.required],
-            isActive: ['']
+            weight_unit: ['', Validators.required],
+            category_id: [null, Validators.required],
+            is_active: ['']
         });
     }
 

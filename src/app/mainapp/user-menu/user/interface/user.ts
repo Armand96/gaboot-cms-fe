@@ -1,16 +1,16 @@
 import { Role } from '../../role/interface/role';
 
 export class User {
-    id: number = 0;
-    userName: string = '';
+    id: string = "";
+    username: string = '';
     email: string = '';
-    firstName: string = '';
-    lastName: string = '';
+    firstname: string = '';
+    lastname: string = '';
     password: string = '';
     token: string = '';
-    isActive: boolean = false;
-    imgPath: string = '';
-    imgThumbPath: string = '';
-    roleId: number = 0;
+    is_active: boolean = false;
+    image_path: string = '';
+    thumbnail_path: string = '';
+    role_id: string = "";
     role: Role = {} as Role;
 }

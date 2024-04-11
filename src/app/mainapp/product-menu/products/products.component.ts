@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     products = [] as Product[];
     hasLoadProduct: boolean = false;
 
-    selectedIdProduct: number = 0;
+    selectedIdProduct: string= "";
     selectedProduct = new Subject<Product>();
     operationMode: string = '';
     isOpenModalCru: boolean = false;
@@ -68,7 +68,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
 
     /* IMAGE MODAL */
-    imageModal(id: number) {
+    imageModal(id: string) {
         this.selectedIdProduct = id;
         this.prodSvc.getProduct(id).subscribe({
             next: (res) => {
@@ -87,7 +87,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
 
     /* EDIT MODAL */
-    edit(id: number) {
+    edit(id: string) {
         this.selectedIdProduct = id;
         this.prodSvc.getProduct(id).subscribe({
             next: (res) => {

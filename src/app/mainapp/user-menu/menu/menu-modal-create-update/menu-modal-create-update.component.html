@@ -9,21 +9,21 @@
                 <label class="label">
                     <span class="label-text">Menu Name</span>
                 </label>
-                <input type="text" formControlName="menuName" class="input input-bordered w-full max-w-xs" required />
+                <input type="text" formControlName="menu_name" class="input input-bordered w-full max-w-xs" required />
             </div>
 
             <div class="form-control w-full px-2">
                 <label class="label">
                     <span class="label-text">Menu Icon</span>
                 </label>
-                <input type="text" formControlName="menuIcon" class="input input-bordered w-full max-w-xs" required />
+                <input type="text" formControlName="menu_icon" class="input input-bordered w-full max-w-xs" required />
             </div>
 
             <div class="form-control w-full px-2">
                 <label class="label">
                     <span class="label-text">Front End URL</span>
                 </label>
-                <input type="text" formControlName="frontendUrl" class="input input-bordered w-full max-w-xs"
+                <input type="text" formControlName="frontend_url" class="input input-bordered w-full max-w-xs"
                     required />
             </div>
 
@@ -31,13 +31,13 @@
                 <label class="label">
                     <span class="label-text">Back End URL</span>
                 </label>
-                <input type="text" formControlName="backendUrl" class="input input-bordered w-full max-w-xs" required />
+                <input type="text" formControlName="backend_url" class="input input-bordered w-full max-w-xs" required />
             </div>
 
             <div class="form-control w-full px-2">
                 <label class="label cursor-pointer mt-9">
                     <span class="label-text">Menu Have Children</span>
-                    <input formControlName="menuHaveChild" type="checkbox" class="checkbox"
+                    <input formControlName="menu_have_child" type="checkbox" class="checkbox"
                         (input)="disableUrl($event.target)" />
                 </label>
             </div>
@@ -45,7 +45,7 @@
             <div class="form-control w-full px-2">
                 <label class="label cursor-pointer mt-9">
                     <span class="label-text">Active</span>
-                    <input formControlName="menuIsActive" type="checkbox" class="checkbox" />
+                    <input formControlName="menu_is_active" type="checkbox" class="checkbox" />
                 </label>
             </div>
 

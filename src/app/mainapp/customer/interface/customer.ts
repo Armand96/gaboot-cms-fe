@@ -1,16 +1,16 @@
 export class Customer {
-    id: number = 0;
+    id: string = "";
     firstname: string = "";
     lastname: string = "";
     username: string = "";
     email: string = "";
-    phoneNumber: string = "";
-    addressDetail: string = "";
+    phone_number: string = "";
+    address_detail: string = "";
     latitude: number = 0;
     longitude: number = 0;
     password: string = "";
     token: string = "";
-    isActive: boolean = false;
-    imgPath: string = "";
-    imgThumbPath: string = "";
+    is_active: boolean = false;
+    image_path: string = "";
+    thumbnail_path: string = "";
 }

@@ -10,7 +10,7 @@
                 <label class="label">
                     <span class="label-text">User Name</span>
                 </label>
-                <input type="text" formControlName="userName" class="input input-bordered w-full max-w-xs" required />
+                <input type="text" formControlName="username" class="input input-bordered w-full max-w-xs" required />
             </div>
 
             <div class="form-control w-full px-2">
@@ -24,14 +24,14 @@
                 <label class="label">
                     <span class="label-text">First Name</span>
                 </label>
-                <input type="text" formControlName="firstName" class="input input-bordered w-full max-w-xs" required />
+                <input type="text" formControlName="firstname" class="input input-bordered w-full max-w-xs" required />
             </div>
 
             <div class="form-control w-full px-2">
                 <label class="label">
                     <span class="label-text">Last Name</span>
                 </label>
-                <input type="text" formControlName="lastName" class="input input-bordered w-full max-w-xs" required />
+                <input type="text" formControlName="lastname" class="input input-bordered w-full max-w-xs" required />
             </div>
 
             <div class="form-control w-full px-2">
@@ -46,8 +46,8 @@
                 <label class="label">
                     <span class="label-text">Role</span>
                 </label>
-                <select formControlName="roleId" class="select select-bordered" *ngIf="hasLoadRole" required>
-                    <option *ngFor="let rl of roles" value="{{ rl.id }}">{{ rl.roleName }}</option>
+                <select formControlName="role_id" class="select select-bordered" *ngIf="hasLoadRole" required>
+                    <option *ngFor="let rl of roles" value="{{ rl.id }}">{{ rl.role_name }}</option>
                 </select>
             </div>
 
@@ -62,7 +62,7 @@
             <div class="form-control w-full px-2">
                 <label class="label cursor-pointer mt-9">
                     <span class="label-text">Active</span>
-                    <input formControlName="isActive" type="checkbox" class="checkbox" />
+                    <input formControlName="is_active" type="checkbox" class="checkbox" />
                 </label>
             </div>
 

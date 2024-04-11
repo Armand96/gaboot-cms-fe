@@ -17,7 +17,7 @@
                         <span class="label-text">Submenu Name</span>
                     </label>
                     <input type="text" class="input input-bordered w-full max-w-xs"
-                        [(ngModel)]="dataSearch.submenuName" />
+                        [(ngModel)]="dataSearch.submenu_name" />
                 </div>
 
                 <div class="w-full"></div>
@@ -41,15 +41,15 @@
                 <tbody>
 
                     <tr class="hover"
-                        *ngFor="let sm of submenus | paginate: { id:'submenuPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-                        <th>{{ sm.id }}</th>
-                        <td>{{ sm.submenuName }}</td>
+                        *ngFor="let sm of submenus | paginate: { id:'submenuPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                        <th>{{ i+1 }}</th>
+                        <td>{{ sm.submenu_name }}</td>
                         <td class="text-center">
-                            <i [ngClass]="sm.submenuIcon"></i>
+                            <i [ngClass]="sm.submenu_icon"></i>
                         </td>
                         <td class="text-center">
-                            <i class="fa-solid fa-check text-xl text-accent" *ngIf="sm.submenuIsActive"></i>
-                            <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!sm.submenuIsActive"></i>
+                            <i class="fa-solid fa-check text-xl text-accent" *ngIf="sm.submenu_is_active"></i>
+                            <i class="fa-solid fa-xmark text-xl text-error" *ngIf="!sm.submenu_is_active"></i>
                         </td>
                         <td>
                             <div class="flex justify-center items-center">

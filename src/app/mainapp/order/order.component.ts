@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     orders = [] as Order[];
     hasLoadOrder: boolean = false;
 
-    selectedIdOrder: number = 0;
+    selectedIdOrder: string= "";
     selectedOrder = new Subject<Order>();
     operationMode: string = '';
     isOpenModalCru: boolean = false;
@@ -67,7 +67,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
 
     /* EDIT MODAL */
-    edit(id: number) {
+    edit(id: string) {
         this.selectedIdOrder = id;
         this.ordSvc.getOrder(id).subscribe({
             next: (res) => {

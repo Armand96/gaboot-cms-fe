@@ -38,13 +38,13 @@
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let ctgr of categories | paginate: { id:'categoriesPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }">
-                    <th>{{ ctgr.id }}</th>
+                    *ngFor="let ctgr of categories | paginate: { id:'categoriesPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                    <th>{{ i+1 }}</th>
                     <td>{{ ctgr.name }}</td>
                     <td class="text-center">
                         <div class="flex justify-center items-center">
                             <div class="w-20 rounded text-center">
-                                <img src="{{ api.imageUrl + ctgr.imgThumbPath }}" alt="">
+                                <img src="{{ api.imageUrl + ctgr.thumbnail_path }}" alt="">
                             </div>
                         </div>
                     </td>

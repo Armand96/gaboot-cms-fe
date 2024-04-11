@@ -20,7 +20,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     customers = [] as Customer[];
     hasLoadCustomer: boolean = false;
 
-    selectedIdCustomer: number = 0;
+    selectedIdCustomer: string= "";
     selectedCustomer = new Subject<Customer>();
     operationMode: string = '';
     isOpenModalCru: boolean = false;
@@ -67,7 +67,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     }
 
     /* EDIT MODAL */
-    edit(id: number) {
+    edit(id: string) {
         this.selectedIdCustomer = id;
         this.cusSvc.getCustomer(id).subscribe({
             next: (res) => {

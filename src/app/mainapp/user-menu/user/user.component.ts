@@ -21,7 +21,7 @@ export class UserComponent implements OnInit, OnDestroy {
     users = [] as User[];
     hasLoadUser: boolean = false;
 
-    selectedIdUser: number = 0;
+    selectedIdUser: string = "";
     selectedUser = new Subject<User>();
     operationMode: string = '';
     isOpenModalCru: boolean = false;
@@ -32,8 +32,8 @@ export class UserComponent implements OnInit, OnDestroy {
     dataSearch: any = {
         page: 1,
         limit: 10,
-        userName: '',
-        fullName: '',
+        username: '',
+        full_name: '',
     };
 
     ngOnInit(): void {
@@ -74,7 +74,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
 
     /* EDIT MODAL */
-    edit(id: number) {
+    edit(id: string) {
         this.selectedIdUser = id;
         this.usrSvc.getUser(id).subscribe({
             next: (res) => {
