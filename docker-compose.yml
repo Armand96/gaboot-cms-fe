@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: gaboot-cms-frontend
+    container_name: gaboot-cms-frontend-container
     restart: unless-stopped
     init: true
     ports:
