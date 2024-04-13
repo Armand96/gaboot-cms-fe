@@ -25,7 +25,7 @@ jobs:
         run: ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "git config --global --add safe.directory /var/www/cms.gbt.com/frontend"
 
       - name: Stop existing Docker containers
-        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cms.gbt.com/frontend && sudo docker-compose down"
+        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cms.gbt.com/frontend && sudo docker-compose down --remove-orphans"
 
       - name: Deploy code
         run: |
