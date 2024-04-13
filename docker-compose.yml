@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  gaboot-cms-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gaboot-cms-frontend
+    restart: unless-stopped
+    init: true
+    ports:
+      - 8001:80
+      # - 8443:443
