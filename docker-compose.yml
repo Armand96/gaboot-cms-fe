@@ -8,5 +8,5 @@ services:
     restart: unless-stopped
     init: true
     ports:
-      - 8002:80
+      - 8002:81
       # - 8443:443
