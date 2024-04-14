@@ -3,6 +3,6 @@ server {
   location / {
     root   /var/www/html/gaboot-cms-fe;
     index  index.html index.htm;
-    try_files $uri $uri/ /index.html?$args =404;
+    try_files $uri $uri/ /index.html =404;
   }
 }

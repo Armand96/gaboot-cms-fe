@@ -1,6 +1,9 @@
 # Use the official Node.js runtime as the base image
 FROM node:latest as build
 
+# SET VARIABLE
+ARG BASEHREF
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -14,7 +17,8 @@ RUN npm install
 COPY . .
 
 # Build the React app for production
-RUN npm run build
+# RUN npm run build --base-href=http://103.127.97.223:85/
+RUN npm run build --base-href=$BASEHREF
 
 FROM ubuntu
 RUN apt-get update
