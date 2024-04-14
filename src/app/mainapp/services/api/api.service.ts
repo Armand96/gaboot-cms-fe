@@ -71,7 +71,7 @@ export class ApiService {
 
         /* UNATHORIZED */
         // console.log("ERROR SERVICE", error);
-        if (error.status == 401 && error.error.message == "JWT Expired") {
+        if (error.status == 401 || error.error.message == "JWT Expired") {
             localStorage.clear();
             this.router.navigateByUrl('/login');
         }
