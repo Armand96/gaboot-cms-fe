@@ -32,4 +32,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cms.gbt.com/cms-frontend && sudo git pull origin master"
 
       - name: Build and start Docker containers
-        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cms.gbt.com/cms-frontend && sudo docker-compose up --build -d --build-arg basehref=http://${{ secrets.SERVER_IP }}:85/"
+        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cms.gbt.com/cms-frontend && sudo docker-compose up --build -d --build-arg BASEHREF=http://${{ secrets.SERVER_IP }}:85/"
