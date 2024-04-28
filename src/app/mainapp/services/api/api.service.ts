@@ -17,8 +17,8 @@ export class ApiService {
         private router: Router,
     ) {}
 
-    public baseUrl: string = 'http://localhost:3000/';
-    // public baseUrl: string = 'https://gaboot-cms.rena.my.id/';
+    // public baseUrl: string = 'http://localhost:3000/';
+    public baseUrl: string = 'https://gaboot-cms.rena.my.id/';
     public imageUrl: string = this.baseUrl+'images?image=';
 
     getAPI<T>(url: string, headers?: HttpHeaders) {
