@@ -2,7 +2,7 @@ import { Submenu } from '../../submenu/interface/submenu';
 import { MenuAccess } from './menu-access';
 
 export class Menu {
-    access: MenuAccess = {} as MenuAccess;
+    access: MenuAccess[] = [];
     id: string = "";
     menu_id: string = "";
     menu_name: string = '';

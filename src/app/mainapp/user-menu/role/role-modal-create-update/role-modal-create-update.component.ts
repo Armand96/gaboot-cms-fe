@@ -96,15 +96,15 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                                 .at(index)
                                 .patchValue({ is_checked: true });
 
-                            // console.log(mn);
+                            console.log("MEEENU",mn);
 
                             if (mn.menu != null) {
                                 this.menuz().at(index).patchValue({
                                     is_checked: true,
-                                    create_access: mn.menu.access.create_access,
-                                    read_access: mn.menu.access.read_access,
-                                    update_access: mn.menu.access.update_access,
-                                    delete_access: mn.menu.access.delete_access,
+                                    create_access: mn.menu.access[0].create_access,
+                                    read_access: mn.menu.access[0].read_access,
+                                    update_access: mn.menu.access[0].update_access,
+                                    delete_access: mn.menu.access[0].delete_access,
                                 });
                             }
 
