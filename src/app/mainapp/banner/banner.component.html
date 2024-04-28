@@ -1,6 +1,6 @@
 <div>
     <div class="flex">
-        <h3 class="text-2xl mb-2">Daftar Categories</h3>
+        <h3 class="text-2xl mb-2">Daftar Banners</h3>
         <button class="btn btn-primary ml-auto mb-2" (click)="create()">Buat</button>
     </div>
 
@@ -12,7 +12,7 @@
         <div class="collapse-content grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 mb-5">
             <div class="form-control w-full px-2">
                 <label class="label">
-                    <span class="label-text">Category Name</span>
+                    <span class="label-text">Banner Name</span>
                 </label>
                 <input type="text" class="input input-bordered w-full max-w-xs" [(ngModel)]="dataSearch.name" />
             </div>
@@ -30,29 +30,29 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Category Name</th>
-                    <th class="text-center">Category Image</th>
+                    <th>Banner Name</th>
+                    <th class="text-center">Banner Image</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
 
                 <tr class="hover"
-                    *ngFor="let ctgr of categories | paginate: { id:'categoriesPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
+                    *ngFor="let banner of banners | paginate: { id:'bannersPage', itemsPerPage: dataSearch.limit, currentPage: dataSearch.page, totalItems: totalData }; let i = index">
                     <th>{{ i+1 }}</th>
-                    <td>{{ ctgr.name }}</td>
+                    <td>{{ banner.name }}</td>
                     <td class="text-center">
                         <div class="flex justify-center items-center">
                             <div class="w-20 rounded text-center">
-                                <img src="{{ api.imageUrl + ctgr.thumbnail_path }}" alt="">
+                                <img src="{{ api.imageUrl + banner.thumbnail_path }}" alt="">
                             </div>
                         </div>
                     </td>
                     <td>
                         <div class="flex justify-center items-center">
                             <!-- <label for="my-modal-6" class="btn btn-primary mx-1">Ubah</label> -->
-                            <button class="btn btn-primary mx-1" (click)="edit(ctgr.id)">Ubah</button>
-                            <!-- <button class="btn btn-warning mx-1" (click)="delete(ctgr)">Hapus</button> -->
+                            <button class="btn btn-primary mx-1" (click)="edit(banner.id)">Ubah</button>
+                            <!-- <button class="btn btn-warning mx-1" (click)="delete(banner)">Hapus</button> -->
                         </div>
                     </td>
                 </tr>
@@ -62,11 +62,11 @@
     </div>
 
     <div class="text-center mt-5">
-        <pagination-controls (pageChange)="onPageChange($event)" id="categoriesPage"></pagination-controls>
+        <pagination-controls (pageChange)="onPageChange($event)" id="bannersPage"></pagination-controls>
     </div>
 </div>
 
-<app-categories-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
-    [textCreateUpdate]="operationMode" [selectedCategory]="selectedCategory"></app-categories-modal-create-update>
+<app-banner-modal-create-update [isOpenedModal]="isOpenModalCru" (modalEvent)="pCloseModalCru($event)"
+    [textCreateUpdate]="operationMode" [selectedBanner]="selectedBanner"></app-banner-modal-create-update>
 <!-- <app-menu-modal-delete [isOpenedModal]="isOpenModalDel" (modalEvent)="pCloseModalDel($event)"
-		[Category]="selectedCategory"></app-menu-modal-delete> -->
+		[Banner]="selectedBanner"></app-menu-modal-delete> -->

@@ -60,6 +60,8 @@ export class CategoriesModalCreateUpdateComponent implements OnInit, OnDestroy {
     cCloseModal() {
         this.isOpenedModal = false;
         this.modalEvent.emit(false);
+        this.categoryForm.controls['img'].setValue("");
+        this.fileData = {} as File;
     }
 
     submitForm(value: CreateCategoryDto) {
@@ -87,5 +89,8 @@ export class CategoriesModalCreateUpdateComponent implements OnInit, OnDestroy {
                 error: this.api.errorHandler,
             });
         }
+
+        this.fileData = {} as File;
+        this.categoryForm.controls['img'].setValue("");
     }
 }
