@@ -77,6 +77,8 @@ export class TopnavbarComponent implements OnInit, OnDestroy {
 
     closeModal() {
         this.isOpenedModal = false;
+        this.userForm.controls['img'].setValue("");
+        this.fileData = {} as File;
     }
 
     submitForm(value: UserCreateDTO) {
@@ -98,5 +100,8 @@ export class TopnavbarComponent implements OnInit, OnDestroy {
             },
             error: this.api.errorHandler,
         });
+
+        this.fileData = {} as File;
+        this.userForm.controls['img'].setValue("");
     }
 }

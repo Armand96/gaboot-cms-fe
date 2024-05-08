@@ -79,6 +79,8 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
         this.subscriptions.add(
             this.selectedRole.subscribe({
                 next: (res) => {
+                    // console.log("RESPONSE", res);
+
                     this.role = res;
 
                     this.roleForm.controls['role_name'].setValue(res.role_name);
@@ -88,21 +90,21 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                             const index = this.roleForm.controls[
                                 'role_menus'
                             ].value.findIndex(
-                                (item: any) => item.menuId == mn.menu_id,
+                                (item: any) => item.menu_id == mn.menu_id,
                             );
                             this.menuz()
                                 .at(index)
-                                .patchValue({ isChecked: true });
+                                .patchValue({ is_checked: true });
 
-                            // console.log(mn);
+                            console.log("MEEENU",mn);
 
                             if (mn.menu != null) {
                                 this.menuz().at(index).patchValue({
-                                    isChecked: true,
-                                    create_access: mn.menu.access.create_access,
-                                    read_access: mn.menu.access.read_access,
-                                    update_access: mn.menu.access.update_access,
-                                    delete_access: mn.menu.access.delete_access,
+                                    is_checked: true,
+                                    create_access: mn.menu.access[0].create_access,
+                                    read_access: mn.menu.access[0].read_access,
+                                    update_access: mn.menu.access[0].update_access,
+                                    delete_access: mn.menu.access[0].delete_access,
                                 });
                             }
 
@@ -114,11 +116,11 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
                                         (subItem: any) =>
                                             subItem.submenu_id == sm.submenu_id,
                                     );
-                                // console.log(mn, sm)
+                                // console.log("MENU", mn);
                                 this.submenusForm(index)
                                     .at(subIndex)
                                     .patchValue({
-                                        isChecked: true,
+                                        is_checked: true,
                                         create_access: sm.submenu.access.create_access,
                                         read_access: sm.submenu.access.read_access,
                                         update_access: sm.submenu.access.update_access,
@@ -147,14 +149,34 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
         });
     }
 
+    preStartForm(){
+        for (let index = 0; index < this.menus.length; index++) {
+            const element = this.menus[index];
+            this.addMenu(element.id);
+            // console.log(this.roleForm);
+
+            if (element.menu_have_child) {
+                for (
+                    let idxJ = 0;
+                    idxJ < element.submenus.length;
+                    idxJ++
+                ) {
+                    const elm = element.submenus[idxJ];
+                    // console.log('index submenu', index);
+                    this.addSubmenus(index, elm.id, elm.menu_id);
+                }
+            }
+        }
+    }
+
     menuz(): FormArray {
         return this.roleForm.get('role_menus') as FormArray;
     }
 
-    newMenu(menuId: string): FormGroup {
+    newMenu(menu_id: string): FormGroup {
         return this.fb.group({
             is_checked: false,
-            menu_id: menuId,
+            menu_id: menu_id,
             create_access: false,
             read_access: false,
             update_access: false,
@@ -163,19 +185,19 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
         });
     }
 
-    addMenu(menuId: string) {
-        this.menuz().push(this.newMenu(menuId));
+    addMenu(menu_id: string) {
+        this.menuz().push(this.newMenu(menu_id));
     }
 
     submenusForm(menuIndex: number): FormArray {
         return this.menuz().at(menuIndex).get('role_submenus') as FormArray;
     }
 
-    newSubmenu(submenuId: string, menuId: string): FormGroup {
+    newSubmenu(submenuId: string, menu_id: string): FormGroup {
         return this.fb.group({
             is_checked: false,
             submenu_id: submenuId,
-            menu_id: menuId,
+            menu_id: menu_id,
             create_access: '',
             read_access: '',
             update_access: '',
@@ -183,8 +205,8 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
         });
     }
 
-    addSubmenus(menuIndex: number, submenuId: string, menuId: string) {
-        this.submenusForm(menuIndex).push(this.newSubmenu(submenuId, menuId));
+    addSubmenus(menuIndex: number, submenuId: string, menu_id: string) {
+        this.submenusForm(menuIndex).push(this.newSubmenu(submenuId, menu_id));
     }
 
     /* =========================================================== */
@@ -192,6 +214,8 @@ export class RoleModalCreateUpdateComponent implements OnInit, OnDestroy {
     cCloseModal() {
         this.isOpenedModal = false;
         this.modalEvent.emit(false);
+        this.setForm();
+        this.preStartForm();
     }
 
     submitForm(value: CreateRoleDto) {

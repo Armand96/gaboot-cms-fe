@@ -91,6 +91,8 @@ export class UserModalCreateUpdateComponent implements OnInit, OnDestroy {
     cCloseModal() {
         this.isOpenedModal = false;
         this.modalEvent.emit(false);
+        this.userForm.controls['img'].setValue("");
+        this.fileData = {} as File;
     }
 
     submitForm(value: UserCreateDTO) {
@@ -123,5 +125,8 @@ export class UserModalCreateUpdateComponent implements OnInit, OnDestroy {
                 error: this.api.errorHandler,
             });
         }
+
+        this.fileData = {} as File;
+        this.userForm.controls['img'].setValue("");
     }
 }

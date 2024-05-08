@@ -1,28 +1,28 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ApiService } from '../../services/api/api.service';
-import { Category } from './interface/category';
-import { CategoriesService } from './service/categories.service';
-import { constCreateCategory, constUpdateCategory } from './categories.const';
+import { ApiService } from '../services/api/api.service';
+import { constCreateBanner, constUpdateBanner } from './banner.const';
+import { Banner } from './interface/banner';
+import { BannerService } from './service/banner.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-banner',
+  templateUrl: './banner.component.html',
+  styleUrls: ['./banner.component.css']
 })
-export class CategoriesComponent implements OnInit, OnDestroy {
+export class BannerComponent implements OnInit, OnDestroy {
+
     constructor(
         public api: ApiService,
-        private categorySvc: CategoriesService,
+        private bannerSvc: BannerService,
     ) {}
 
-    categories = [] as Category[];
+    banners = [] as Banner[];
     hasLoad: boolean = false;
     operationMode: string = '';
     isOpenModalCru: boolean = false;
     isOpenModalDel: boolean = false;
-
-    selectedCategory = new Subject<Category>();
+    selectedBanner = new Subject<Banner>();
 
     /* FILTER PARAMETER */
     totalData = 0;
@@ -37,15 +37,15 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.selectedCategory.unsubscribe();
+        this.selectedBanner.unsubscribe();
     }
 
     /* ==================================================== */
     search() {
         const paramsString = this.api.searchParam(this.dataSearch);
-        this.categorySvc.getCategories(paramsString).subscribe({
+        this.bannerSvc.getBanner(paramsString).subscribe({
             next: (res) => {
-                this.categories = res.data;
+                this.banners = res.data;
                 this.hasLoad = true;
                 this.totalData = res.totalData;
                 this.api.successToastr(res.message, 'Success');
@@ -62,33 +62,33 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     create() {
         // console.log('pressed');
         this.isOpenModalCru = true;
-        this.operationMode = constCreateCategory;
-        this.selectedCategory.next({} as Category);
+        this.operationMode = constCreateBanner;
+        this.selectedBanner.next({} as Banner);
     }
 
-    edit(categoryId: string) {
-        this.categorySvc.getCategory(categoryId).subscribe({
+    edit(bannerId: string) {
+        this.bannerSvc.getBanner(bannerId).subscribe({
             next: (res) => {
-                this.selectedCategory.next(res.datum);
-                this.operationMode = constUpdateCategory;
+                this.selectedBanner.next(res.datum);
+                this.operationMode = constUpdateBanner;
                 this.isOpenModalCru = true;
             },
             error: this.api.errorHandler,
         });
     }
 
-    delete(category: Category) {
+    delete(banner: Banner) {
         this.isOpenModalDel = true;
-        this.selectedCategory.next(category);
+        this.selectedBanner.next(banner);
     }
 
     /* ==================================================== */
     /* CLOSE MODAL CREATE UPDATE */
     pCloseModalCru(value: boolean) {
         this.isOpenModalCru = value;
-        this.categorySvc.getCategories().subscribe({
+        this.bannerSvc.getBanners().subscribe({
             next: (res) => {
-                this.categories = res.data;
+                this.banners = res.data;
             },
             error: this.api.errorHandler,
         });
@@ -97,9 +97,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     /* CLOSE MODAL DELETE */
     pCloseModalDel(value: boolean) {
         this.isOpenModalDel = value;
-        this.categorySvc.getCategories().subscribe({
+        this.bannerSvc.getBanners().subscribe({
             next: (res) => {
-                this.categories = res.data;
+                this.banners = res.data;
             },
             error: this.api.errorHandler,
         });

@@ -66,6 +66,8 @@ export class ProductsImagesComponent implements OnInit, OnDestroy {
     cCloseModal() {
         this.isOpenedModal = false;
         this.modalEvent.emit(false);
+        this.imageForm.controls['img'].setValue("");
+        this.files = [];
     }
 
     submitForm(value:any) {
@@ -84,6 +86,9 @@ export class ProductsImagesComponent implements OnInit, OnDestroy {
             },
             error: this.api.errorHandler
         })
+
+        this.imageForm.controls['img'].setValue("");
+        this.files = [];
     }
 
     deleteImage(id: string) {
